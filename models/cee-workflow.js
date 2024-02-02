@@ -5,7 +5,7 @@ const sequelize = require('../database');
 module.exports = (sequelize, DataTypes) => {
     class CeeWorkflow extends Model {
       static associate(models) {
-        CeeWorkflow.belongsTo(models.Cee, { foreignKey: 'ceeId', targetKey: 'id', references: { model: 'Cees', key: 'id' } });
+        CeeWorkflow.belongsTo(models.Cee, { as: 'Cee', foreignKey: 'ceeId', targetKey: 'id', references: { model: 'Cee', key: 'id' } });
       }
     }
     
