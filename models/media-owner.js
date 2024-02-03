@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      MediaOwner.hasMany(models.MediaLibrary,{
-        as:'MediaLibrary',
+      MediaOwner.hasMany(models.Media,{
+        as:'Media',
         foreignKey: 'mediaOwnerId',
         sourceKey: 'id',
       });

@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class MediaLibrary extends Model {
+  class Media extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here      
-      MediaLibrary.belongsTo(models.MediaOwner,{
+      Media.belongsTo(models.MediaOwner,{
         as:'MediaOwner',
         foreignKey: 'mediaOwnerId',
         targetKey: 'id',
@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   }
-  MediaLibrary.init({
+  Media.init({
     id: {
         type: DataTypes.UUID,
         defaultValue: () => uuidv4(),
@@ -27,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     name: DataTypes.STRING,
     description: DataTypes.STRING,
+    type: DataTypes.STRING,
     mediaOwnerId: DataTypes.STRING,
     encodingFormat: DataTypes.STRING,
     resource: DataTypes.STRING,
@@ -35,8 +36,8 @@ module.exports = (sequelize, DataTypes) => {
     parentId: DataTypes.STRING,
   }, {
     sequelize,
-    modelName: 'MediaLibrary',
+    modelName: 'Media',
     freezeTableName: true
   });
-  return MediaLibrary;
+  return Media;
 };
