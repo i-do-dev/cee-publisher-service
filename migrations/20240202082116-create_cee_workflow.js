@@ -21,15 +21,23 @@ module.exports = {
         type: Sequelize.UUID,
         allowNull: false,
       },
-      type: Sequelize.STRING,
       schemaType: Sequelize.STRING,
       schemaVersion: Sequelize.STRING,
       learningResourceType: Sequelize.STRING,
       educationalLevel: Sequelize.STRING,
+      subject: Sequelize.STRING,
       keywords: Sequelize.STRING,
       status: {
         type: Sequelize.STRING,
         defaultValue: 'draft',
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
       },
     });
   },

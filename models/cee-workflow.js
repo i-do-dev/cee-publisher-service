@@ -27,10 +27,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.UUID,
         allowNull: false,
       },
-      type: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
       schemaType: {
         type: DataTypes.STRING,
         allowNull: true,
@@ -47,11 +43,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      keywords: {
+      subject: {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      subject: {
+      keywords: {
         type: DataTypes.STRING,
         allowNull: true,
       },
