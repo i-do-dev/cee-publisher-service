@@ -1,22 +1,22 @@
+// Make CeeCreator model with id, name and email attributes and associate it with Cee model
 const { DataTypes, Model } = require('sequelize');
 const { v4: uuidv4 } = require('uuid');
 const sequelize = require('../database');
 
 module.exports = (sequelize, DataTypes) => {
-    class Cee extends Model {
+    class CeeCreator extends Model {
         static associate(models) {
-            Cee.hasMany(models.CeeWorkflow, { foreignKey: 'ceeId', sourceKey: 'id' });
-            // Cee has one CeeCreator
-            Cee.hasOne(models.CeeCreator, { 
+            // CeeCreator belongs to Cee
+            CeeCreator.belongsTo(models.Cee, { 
                 foreignKey: 'ceeId', 
-                sourceKey: 'id', 
-                as: 'CeeCreator',
-                references: { model: 'CeeCreator', key: 'id' }
+                targetKey: 'id', 
+                as: 'Cee',
+                references: { model: 'Cee', key: 'id' }
             });
         }
     }
     
-    Cee.init({
+    CeeCreator.init({
         id: {
             type: DataTypes.UUID,
             defaultValue: () => uuidv4(),
@@ -26,23 +26,18 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        description: {
+        email: {
             type: DataTypes.STRING,
-            allowNull: true,
+            allowNull: false,
         },
-        manifest: {
-            type: DataTypes.TEXT,
-            allowNull: true,
-        },
-        type: {
-            type: DataTypes.STRING,
-            allowNull: true,
-        },
+        ceeId: {
+            type: DataTypes.UUID,
+            allowNull: false,
+        }
     },
     {
         sequelize,
-        modelName: 'Cee',
+        modelName: 'CeeCreator',
         freezeTableName: true,
     });
-};
-
+}

@@ -7,7 +7,7 @@ module.exports = {
       type: 'foreign key',
       name: 'CeeWorkflow_ceeId_fkey',
       references: {
-        table: 'Cees',
+        table: 'Cee',
         field: 'id'
       },
       onDelete: 'cascade',
