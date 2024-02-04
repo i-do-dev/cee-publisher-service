@@ -1,29 +1,30 @@
 'use strict';
+
+const { on } = require("nodemailer/lib/xoauth2");
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Media', {
+    await queryInterface.createTable('MediaRoyalty', {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
         defaultValue: () => uuidv4(),
       },
-      name: Sequelize.STRING,
-      description: Sequelize.STRING,
       type: Sequelize.STRING,
-      mediaOwnerId: Sequelize.STRING,
-      encodingFormat: Sequelize.STRING,
-      resource: Sequelize.STRING,
-      identifierType: Sequelize.STRING,
-      identifier: Sequelize.STRING,
-      parentId: {
+      amount: Sequelize.DECIMAL,
+      currency: Sequelize.STRING,
+      licenseShortText: Sequelize.STRING,
+      licenseLongText: Sequelize.STRING,
+      mediaId: {
         type: Sequelize.UUID,
+        allowNull: false,
         references: {
           model: 'Media',
-          key: 'id'
+          key: 'id',
         },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
+        onDelete: 'CASCADE',
       },
       createdAt: {
         allowNull: false,
@@ -34,10 +35,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-      }
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Media');
+    await queryInterface.dropTable('MediaRoyalty');
   }
 };

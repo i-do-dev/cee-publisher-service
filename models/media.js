@@ -17,6 +17,13 @@ module.exports = (sequelize, DataTypes) => {
         targetKey: 'id',
         references: { model: 'MediaOwner', key: 'id' }
       });
+
+      Media.hasOne(models.MediaRoyalty, {
+        as: 'MediaRoyalty',
+        foreignKey: 'mediaId',
+        targetKey: 'id',
+        references: { model: 'MediaRoyalty', key: 'id' }
+      });
     }
   }
   Media.init({
