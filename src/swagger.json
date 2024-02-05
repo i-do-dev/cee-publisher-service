@@ -504,7 +504,7 @@
             "in": "header",
             "description": "Authorization",
             "type": "string",
-            "default": "Bearer {API Key}",
+            "default": "Bearer APIKey",
             "required": true
           },
           {
