@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true,
         },
         manifest: {
-            type: DataTypes.TEXT,
+            type: DataTypes.JSONB,
             allowNull: true,
         },
         type: {
