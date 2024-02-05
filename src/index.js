@@ -31,6 +31,9 @@ app.use(
 
 /////////////////// SWAGGER UI ///////////////////
 if (process.env.ENV === "development") {
+  const customCss = `
+    .swagger-ui .models { display: none !important; }
+  `;
   app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 }
 
