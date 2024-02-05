@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "C2E-PLAYER-APP-NODEJS"
+    "title": "C2E Publisher Service"
   },
   "schemes": ["http", "https"],
   "paths": {
@@ -486,6 +486,225 @@
                 }
               }
             }
+        }
+      }
+    },
+    "/api/v1/c2e/publish": {
+      "post": {
+        "x-swagger-router-controller": "c2e",
+        "operationId": "publish-c2e",
+        "tags": ["C2E Routes"],
+        "summary": "Publish C2E",
+        "description": "Endpoint to publish C2E with required entities",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authorization",
+            "type": "string",
+            "default": "Bearer {API Key}",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "payload",
+            "description": "C2E entity details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PublishC2ERequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully published C2E Entity",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer",
+                  "example": 200
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Success"
+                },
+                "result": {
+                  "type": "boolean",
+                  "example": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Invalid request payload"
+                },
+                "result": {
+                  "type": "boolean",
+                  "example": false
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PublishC2ERequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "C2E Title (which would be the as Independent Activity Title in the current case)"
+        },
+        "description": {
+          "type": "string",
+          "description": "C2E Description (which would be the as Independent Activity description in the current case)"
+        },
+        "creator": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "C2E Creator Name (logged in user name or consult with Mike and Leo for the name)"
+            },
+            "email": {
+              "type": "string",
+              "description": "C2E Creator Email (logged in user email or consult with Mike and Leo for the email)"
+            }
+          }
+        },
+        "storeId": {
+          "type": "string",
+          "description": "Unique identifier for the store"
+        },
+        "workflowItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/C2EWorkflowItem"
+          }
+        }
+      }
+    },
+    "C2EWorkflowItem": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Independent Activity Title"
+        },
+        "description": {
+          "type": "string",
+          "description": "Independent Activity description"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the workflow item (e.g., Independent Activity)"
+        },
+        "subject": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Independent Activity Subjects"
+          }
+        },
+        "educationLevel": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Independent Activity Education Levels"
+          }
+        },
+        "keywords": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Independent Activity Keywords"
+          }
+        },
+        "url": {
+          "type": "string",
+          "description": "Independent Activity C2E Protected URL"
+        },
+        "thumbnailUrl": {
+          "type": "string",
+          "description": "Independent Activity Thumbnail URL"
+        },
+        "media": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/C2EMedia"
+          }
+        }
+      }
+    },
+    "C2EMedia": {
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "type": "string",
+          "description": "Identifier for the media"
+        },
+        "identifierType": {
+          "type": "string",
+          "description": "Type of identifier (e.g., ISBN, DOI, URL, UUID, other)"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the media"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the media"
+        },
+        "encodingFormat": {
+          "type": "string",
+          "description": "Encoding format of the media (e.g., video/mp4)"
+        },
+        "royalty": {
+          "$ref": "#/definitions/C2EMediaRoyalty"
+        }
+      }
+    },
+    "C2EMediaRoyalty": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of royalty (e.g., usage, monthly, yearly)"
+        },
+        "terms": {
+          "type": "string",
+          "description": "Terms of the royalty agreement"
+        },
+        "amount": {
+          "type": "string",
+          "description": "Amount of the royalty"
+        },
+        "currency": {
+          "type": "string",
+          "description": "Currency of the royalty (e.g., USD)"
+        },
+        "copyrightNotice": {
+          "type": "string",
+          "description": "Short copyright/license text"
+        },
+        "license": {
+          "type": "string",
+          "description": "Long copyright/license text or HTML formatted content of the video"
         }
       }
     }

@@ -1,6 +1,6 @@
 const { DataTypes, Model } = require('sequelize');
 const { v4: uuidv4 } = require('uuid');
-const sequelize = require('../database');
+const { sequelize } = require("../src/utils/database");
 
 module.exports = (sequelize, DataTypes) => {
     class CeeWorkflow extends Model {
@@ -62,5 +62,6 @@ module.exports = (sequelize, DataTypes) => {
       modelName: 'CeeWorkflow',
       freezeTableName: true,
     });
+    return CeeWorkflow;
 };
 

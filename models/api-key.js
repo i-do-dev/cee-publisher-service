@@ -27,16 +27,15 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             unique: true,
         },
-            clientRoleId: {
-            type: DataTypes.UUID
+        clientRoleId: {
+            type: DataTypes.UUID,
+            allowNull: false
         },
     },
     {
         sequelize,
-        timestamps: false,
         freezeTableName: true,
-        underscored: true,
-        modelName: 'ApiKey',
+        modelName: 'ApiKey'
     });
     return ApiKey;
 };
