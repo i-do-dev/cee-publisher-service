@@ -19,7 +19,7 @@ module.exports = {
         allowNull: true,
       },
       manifest: {
-        type: DataTypes.TEXT,
+        type: DataTypes.JSONB,
         allowNull: true,
       },
       type: {
