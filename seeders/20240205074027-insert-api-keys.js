@@ -3,9 +3,6 @@ const { v4: uuidv4 } = require('uuid');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    const roles = await queryInterface.sequelize.query(
-      `SELECT id FROM "ClientRole";`
-    );
 
     // query ClientRole where name = 'cee-publisher-tool'
     // query ClientRole where name = 'cee-store'
@@ -13,27 +10,27 @@ module.exports = {
     const ceePublisherToolRole = await queryInterface.sequelize.query(
       `SELECT id FROM "ClientRole" WHERE name = 'cee-publisher-tool';`
     );
-    const ceePlayerRole = await queryInterface.sequelize.query(
+    const ceeStoreRole = await queryInterface.sequelize.query(
       `SELECT id FROM "ClientRole" WHERE name = 'cee-store';`
     );
-
-    return queryInterface.bulkInsert('ApiKey', [{
-      id: uuidv4(),
-      key: uuidv4(),
-      clientRoleId: ceePublisherToolRole[0][0].id
-    }, {
-      id: uuidv4(),
-      key: uuidv4(),
-      clientRoleId: ceePlayerRole[0][0].id
-    }], {});
-
-    /*
-    return queryInterface.bulkInsert('ApiKey', [{
-      id: uuidv4(),
-      key: uuidv4(),
-      clientRoleId: roles[0][0].id
-    }], {});
-    */
+    
+    // query ApiKey count to check if thers no existing ApiKey
+    const apiKeyCount = await queryInterface.sequelize.query(
+      `SELECT COUNT(*) FROM "ApiKey";`
+    );
+    
+    const ok = ceePublisherToolRole[0][0] && ceeStoreRole[0][0] && apiKeyCount[0][0].count == 0;
+    if (ok) {
+      return await queryInterface.bulkInsert('ApiKey', [{
+        id: uuidv4(),
+        key: uuidv4(),
+        clientRoleId: ceePublisherToolRole[0][0].id
+      }, {
+        id: uuidv4(),
+        key: uuidv4(),
+        clientRoleId: ceeStoreRole[0][0].id
+      }], {});
+    }
   },
 
   down: async (queryInterface, Sequelize) => {

@@ -11,7 +11,7 @@ module.exports = {
         primaryKey: true,
       },
       key: {
-        type: Sequelize.UUID,
+        type: Sequelize.TEXT,
         defaultValue: () => uuidv4(),
         allowNull: false,
         unique: true,
