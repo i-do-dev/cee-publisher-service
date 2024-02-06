@@ -560,6 +560,58 @@
           }
         }
       }
+    },
+    "/api/v1/service/keys": {
+      "get": {
+        "x-swagger-router-controller": "users",
+        "operationId": "API Keys",
+        "tags": ["API Keys Routes"],
+        "summary": "Get API Keys",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authorization",
+            "type": "string",
+            "default": "Bearer APIKey",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response Format",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer",
+                  "example": 200
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Success"
+                },
+                "result": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "type": "string",
+                        "example": "APIKey"
+                      },
+                      "clientRole": {
+                        "type": "string",
+                        "example": "cee-publisher-tool | cee-store"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -670,12 +722,29 @@
           "type": "string",
           "description": "Description of the media"
         },
+        "resource": {
+          "type": "string",
+          "description": "Media URL or source identifier for the media"
+        },
         "encodingFormat": {
           "type": "string",
           "description": "Encoding format of the media (e.g., video/mp4)"
         },
         "royalty": {
           "$ref": "#/definitions/C2EMediaRoyalty"
+        },
+        "owner": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "C2E Media Owner Name"
+            },
+            "email": {
+              "type": "string",
+              "description": "C2E Media Owner Email"
+            }
+          }
         }
       }
     },

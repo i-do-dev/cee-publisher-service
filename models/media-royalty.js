@@ -7,6 +7,8 @@ ModiaRoyalty model has a one to one relationship with Media model.
 const {
   Model
 } = require('sequelize');
+const { v4: uuidv4 } = require('uuid');
+
 module.exports = (sequelize, DataTypes) => {
   class MediaRoyalty extends Model {
     static associate(models) {
@@ -26,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         },
         type: DataTypes.STRING,
+        terms: DataTypes.STRING,
         amount: DataTypes.DECIMAL,
         currency: DataTypes.STRING,
         licenseShortText: DataTypes.STRING,
