@@ -568,28 +568,28 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "C2E Title (which would be the as Independent Activity Title in the current case)"
+          "description": "C2E Title (which would be the as Educational Experience Title)"
         },
         "description": {
           "type": "string",
-          "description": "C2E Description (which would be the as Independent Activity description in the current case)"
+          "description": "C2E Description (which would be the as Educational Experience description)"
         },
         "creator": {
           "type": "object",
           "properties": {
             "name": {
               "type": "string",
-              "description": "C2E Creator Name (logged in user name or consult with Mike and Leo for the name)"
+              "description": "C2E Creator Name"
             },
             "email": {
               "type": "string",
-              "description": "C2E Creator Email (logged in user email or consult with Mike and Leo for the email)"
+              "description": "C2E Creator Email"
             }
           }
         },
         "storeId": {
           "type": "string",
-          "description": "Unique identifier for the store"
+          "description": "Unique identifier of the store"
         },
         "workflowItems": {
           "type": "array",
@@ -604,44 +604,44 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Independent Activity Title"
+          "description": "Educational Experience Title"
         },
         "description": {
           "type": "string",
-          "description": "Independent Activity description"
+          "description": "Educational Experience description"
         },
         "type": {
           "type": "string",
-          "description": "Type of the workflow item (e.g., Independent Activity)"
+          "description": "Type of the workflow item (e.g., Educational Experience)"
         },
         "subject": {
           "type": "array",
           "items": {
             "type": "string",
-            "description": "Independent Activity Subjects"
+            "description": "Educational Experience Subjects"
           }
         },
         "educationLevel": {
           "type": "array",
           "items": {
             "type": "string",
-            "description": "Independent Activity Education Levels"
+            "description": "Educational Experience Education Levels"
           }
         },
         "keywords": {
           "type": "array",
           "items": {
             "type": "string",
-            "description": "Independent Activity Keywords"
+            "description": "Educational Experience Keywords"
           }
         },
         "url": {
           "type": "string",
-          "description": "Independent Activity C2E Protected URL"
+          "description": "Educational Experience C2E Protected URL"
         },
         "thumbnailUrl": {
           "type": "string",
-          "description": "Independent Activity Thumbnail URL"
+          "description": "Educational Experience Thumbnail URL"
         },
         "media": {
           "type": "array",
