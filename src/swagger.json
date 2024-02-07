@@ -760,7 +760,7 @@
           "description": "Terms of the royalty agreement"
         },
         "amount": {
-          "type": "string",
+          "type": "number",
           "description": "Amount of the royalty"
         },
         "currency": {

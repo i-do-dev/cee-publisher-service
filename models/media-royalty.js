@@ -23,16 +23,16 @@ module.exports = (sequelize, DataTypes) => {
 
     MediaRoyalty.init({
         id: {
-        type: DataTypes.UUID,
-        defaultValue: () => uuidv4(),
-        primaryKey: true,
+          type: DataTypes.UUID,
+          defaultValue: () => uuidv4(),
+          primaryKey: true,
         },
         type: DataTypes.STRING,
         terms: DataTypes.STRING,
         amount: DataTypes.DECIMAL,
         currency: DataTypes.STRING,
-        licenseShortText: DataTypes.STRING,
-        licenseLongText: DataTypes.STRING,
+        copyrightNotice: DataTypes.STRING,
+        license: DataTypes.STRING,
         mediaId: DataTypes.UUID,
     }, {
         sequelize,

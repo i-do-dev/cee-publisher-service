@@ -14,8 +14,8 @@ module.exports = {
       terms: Sequelize.STRING,
       amount: Sequelize.DECIMAL,
       currency: Sequelize.STRING,
-      licenseShortText: Sequelize.STRING,
-      licenseLongText: Sequelize.STRING,
+      copyrightNotice: Sequelize.STRING,
+      license: Sequelize.STRING,
       mediaId: {
         type: Sequelize.UUID,
         allowNull: false,
