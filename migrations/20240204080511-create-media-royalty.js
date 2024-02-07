@@ -1,6 +1,5 @@
 'use strict';
-
-const { on } = require("nodemailer/lib/xoauth2");
+const { v4: uuidv4 } = require('uuid');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -12,10 +11,11 @@ module.exports = {
         defaultValue: () => uuidv4(),
       },
       type: Sequelize.STRING,
+      terms: Sequelize.STRING,
       amount: Sequelize.DECIMAL,
       currency: Sequelize.STRING,
-      licenseShortText: Sequelize.STRING,
-      licenseLongText: Sequelize.STRING,
+      copyrightNotice: Sequelize.STRING,
+      license: Sequelize.STRING,
       mediaId: {
         type: Sequelize.UUID,
         allowNull: false,

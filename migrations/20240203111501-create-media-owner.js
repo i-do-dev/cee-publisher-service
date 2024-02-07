@@ -1,4 +1,5 @@
 'use strict';
+const { v4: uuidv4 } = require('uuid');
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('MediaOwner', {
@@ -8,13 +9,10 @@ module.exports = {
         type: Sequelize.TEXT,
         defaultValue: () => uuidv4(),
       },
-      title: {
+      name: {
         type: Sequelize.STRING
       },
-      description: {
-        type: Sequelize.STRING
-      },
-      about: {
+      email: {
         type: Sequelize.STRING
       },
       createdAt: {
