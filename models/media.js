@@ -13,14 +13,12 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here      
       Media.belongsTo(models.MediaOwner,{
-        as:'MediaOwner',
         foreignKey: 'mediaOwnerId',
         targetKey: 'id',
         references: { model: 'MediaOwner', key: 'id' }
       });
 
       Media.hasOne(models.MediaRoyalty, {
-        as: 'MediaRoyalty',
         foreignKey: 'mediaId',
         targetKey: 'id',
         references: { model: 'MediaRoyalty', key: 'id' }
@@ -43,9 +41,7 @@ module.exports = (sequelize, DataTypes) => {
     identifier: DataTypes.STRING,
     parentId: DataTypes.STRING,
   }, {
-    sequelize,
-    modelName: 'Media',
-    freezeTableName: true
+    sequelize
   });
   return Media;
 };

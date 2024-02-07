@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('ClientRole', {
+    await queryInterface.createTable('ClientRoles', {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -30,6 +30,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('ClientRole');
+    await queryInterface.dropTable('ClientRoles');
   }
 };

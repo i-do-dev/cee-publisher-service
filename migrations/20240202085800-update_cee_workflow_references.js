@@ -2,12 +2,12 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.addConstraint('CeeWorkflow', {
+    await queryInterface.addConstraint('CeeWorkflows', {
       fields: ['ceeId'],
       type: 'foreign key',
       name: 'CeeWorkflow_ceeId_fkey',
       references: {
-        table: 'Cee',
+        table: 'Cees',
         field: 'id'
       },
       onDelete: 'cascade',
@@ -16,6 +16,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.removeConstraint('CeeWorkflow', 'CeeWorkflow_ceeId_fkey');
+    await queryInterface.removeConstraint('CeeWorkflows', 'CeeWorkflow_ceeId_fkey');
   }
 };

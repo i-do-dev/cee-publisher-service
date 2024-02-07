@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable('ApiKey', {
+    return queryInterface.createTable('ApiKeys', {
       id: {
         type: Sequelize.UUID,
         defaultValue: () => uuidv4(),
@@ -19,7 +19,7 @@ module.exports = {
       clientRoleId: {
         type: Sequelize.UUID,
         references: {
-          model: 'ClientRole',
+          model: 'ClientRoles',
           key: 'id'
         }
       },
@@ -37,6 +37,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('ApiKey');
+    return queryInterface.dropTable('ApiKeys');
   }
 };

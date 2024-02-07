@@ -13,7 +13,6 @@ module.exports = (sequelize, DataTypes) => {
   class MediaRoyalty extends Model {
     static associate(models) {
       MediaRoyalty.belongsTo(models.Media, {
-        as: 'Media',
         foreignKey: 'mediaId',
         targetKey: 'id',
         references: { model: 'Media', key: 'id' }
@@ -35,9 +34,7 @@ module.exports = (sequelize, DataTypes) => {
         license: DataTypes.STRING,
         mediaId: DataTypes.UUID,
     }, {
-        sequelize,
-        modelName: 'MediaRoyalty',
-        freezeTableName: true
+        sequelize
     });
 
     return MediaRoyalty;

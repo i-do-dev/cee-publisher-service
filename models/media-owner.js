@@ -12,9 +12,9 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       MediaOwner.hasMany(models.Media,{
-        as:'Media',
         foreignKey: 'mediaOwnerId',
         sourceKey: 'id',
+        references: { model: 'Media', key: 'id' }
       });
     }
   }
@@ -27,9 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     email: DataTypes.STRING
   }, {
-    sequelize,
-    modelName: 'MediaOwner',
-    freezeTableName: true
+    sequelize
   });
 
   return MediaOwner;

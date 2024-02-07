@@ -8,7 +8,6 @@ module.exports = (sequelize, DataTypes) => {
     class ClientRole extends Model {
         static associate(models) {
             ClientRole.hasOne(models.ApiKey, {
-                as: 'ApiKey',
                 foreignKey: 'clientRoleId',
                 sourceKey: 'id',
                 references: { model: 'ApiKey', key: 'id' }
@@ -32,9 +31,7 @@ module.exports = (sequelize, DataTypes) => {
         },
     },
     {
-        sequelize,
-        freezeTableName: true,
-        modelName: 'ClientRole',
+        sequelize
     });
     return ClientRole;
 }

@@ -49,6 +49,11 @@ class PersistCeeService {
                         email: mediaItem.owner.email
                     }
                 });
+
+                // list all the media items
+                const mediaAll = await Media.findAll();
+                console.log('mediaAll :', mediaAll);
+
                 const media = await Media.create({
                     name: mediaItem.name,
                     description: mediaItem.description,
@@ -76,7 +81,6 @@ class PersistCeeService {
                     mediaId: media.id,
                     ceeWorkflowId: workflowItem.id
                 });
-
             }
         }
 

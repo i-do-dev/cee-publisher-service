@@ -21,9 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
   }, {
-    sequelize,
-    modelName: 'ResetPasswordTokens',
-    freezeTableName: true
+    sequelize
   });
   return ResetPasswordTokens;
 };
