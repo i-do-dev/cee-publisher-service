@@ -7,7 +7,6 @@ module.exports = (sequelize, DataTypes) => {
     class ApiKey extends Model {
         static associate(models) {
             ApiKey.belongsTo(models.ClientRole, {
-                as: 'ClientRole',
                 foreignKey: 'clientRoleId',
                 targetKey: 'id',
                 references: { model: 'ClientRole', key: 'id' }
@@ -34,9 +33,7 @@ module.exports = (sequelize, DataTypes) => {
         },
     },
     {
-        sequelize,
-        freezeTableName: true,
-        modelName: 'ApiKey'
+        sequelize
     });
     return ApiKey;
 };

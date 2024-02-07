@@ -6,7 +6,7 @@ module.exports = {
       type: 'foreign key',
       name: 'media_media_owner_id_fk',
       references: {
-        table: 'MediaOwner',
+        table: 'MediaOwners',
         field: 'id'
       },
       onUpdate: 'CASCADE',

@@ -7,8 +7,8 @@ const { sequelize } = require("../src/utils/database");
 module.exports = (sequelize, DataTypes) => {
     class CeeMedia extends Model {
         static associate(models) {
-            CeeMedia.belongsTo(models.CeeWorkflow, { as: 'CeeWorkflow', foreignKey: 'ceeWorkflowId', targetKey: 'id', references: { model: 'CeeWorkflow', key: 'id' } });
-            CeeMedia.belongsTo(models.Media, { as: 'Media', foreignKey: 'mediaId', targetKey: 'id', references: { model: 'Media', key: 'id' } });
+            CeeMedia.belongsTo(models.CeeWorkflow, { foreignKey: 'ceeWorkflowId', targetKey: 'id', references: { model: 'CeeWorkflow', key: 'id' } });
+            CeeMedia.belongsTo(models.Media, { foreignKey: 'mediaId', targetKey: 'id', references: { model: 'Media', key: 'id' } });
         }
     }
     
@@ -28,9 +28,7 @@ module.exports = (sequelize, DataTypes) => {
         }
     },
     {
-        sequelize,
-        modelName: 'CeeMedia',
-        freezeTableName: true,
+        sequelize
     });
     return CeeMedia;
 };

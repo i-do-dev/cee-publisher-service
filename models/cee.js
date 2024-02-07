@@ -9,8 +9,7 @@ module.exports = (sequelize, DataTypes) => {
             // Cee has one CeeCreator
             Cee.hasOne(models.CeeCreator, { 
                 foreignKey: 'ceeId', 
-                sourceKey: 'id', 
-                as: 'CeeCreator',
+                sourceKey: 'id',
                 references: { model: 'CeeCreator', key: 'id' }
             });
         }
@@ -40,9 +39,7 @@ module.exports = (sequelize, DataTypes) => {
         },
     },
     {
-        sequelize,
-        modelName: 'Cee',
-        freezeTableName: true,
+        sequelize
     });
     return Cee;
 };

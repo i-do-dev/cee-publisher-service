@@ -9,8 +9,7 @@ module.exports = (sequelize, DataTypes) => {
             // CeeCreator belongs to Cee
             CeeCreator.belongsTo(models.Cee, { 
                 foreignKey: 'ceeId', 
-                targetKey: 'id', 
-                as: 'Cee',
+                targetKey: 'id',
                 references: { model: 'Cee', key: 'id' }
             });
         }
@@ -36,9 +35,7 @@ module.exports = (sequelize, DataTypes) => {
         }
     },
     {
-        sequelize,
-        modelName: 'CeeCreator',
-        freezeTableName: true,
+        sequelize
     });
     return CeeCreator;
 }

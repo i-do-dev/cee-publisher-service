@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('MediaRoyalty', {
+    await queryInterface.createTable('MediaRoyalties', {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -39,6 +39,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('MediaRoyalty');
+    await queryInterface.dropTable('MediaRoyalties');
   }
 };
