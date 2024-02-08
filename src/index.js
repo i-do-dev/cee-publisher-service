@@ -37,6 +37,7 @@ if (process.env.ENV === "development") {
   app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 }
 
+app.use('/static', express.static('public'));
 /////////////// SET PUBLIC ROUTER ////////////////
 setRouter(app);
 
