@@ -500,11 +500,11 @@
         "produces": ["application/json"],
         "parameters": [
           {
-            "name": "Authorization",
+            "name": "X-API-KEY",
             "in": "header",
-            "description": "Authorization",
+            "description": "C2E Publisher Servcie API Key",
             "type": "string",
-            "default": "Bearer APIKey",
+            "default": "APIKey",
             "required": true
           },
           {
