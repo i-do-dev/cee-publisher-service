@@ -1,9 +1,10 @@
 'use strict';
 const { v4: uuidv4 } = require('uuid');
+const { Key } = require('../src/utils/key');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-
+    /*
     // query ClientRoles where name = 'cee-publisher-tool'
     // query ClientRoles where name = 'cee-store'
     // insert into ApiKey
@@ -23,14 +24,15 @@ module.exports = {
     if (ok) {
       return await queryInterface.bulkInsert('ApiKeys', [{
         id: uuidv4(),
-        key: uuidv4(),
+        key: generateKey(),
         clientRoleId: ceePublisherToolRole[0][0].id
       }, {
         id: uuidv4(),
-        key: uuidv4(),
+        key: generateKey(),
         clientRoleId: ceeStoreRole[0][0].id
       }], {});
     }
+    */
   },
 
   down: async (queryInterface, Sequelize) => {

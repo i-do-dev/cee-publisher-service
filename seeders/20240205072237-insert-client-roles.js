@@ -1,5 +1,6 @@
 'use strict';
 const { v4: uuidv4 } = require('uuid');
+const { generateKey } = require('../src/utils/key');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -14,15 +15,40 @@ module.exports = {
     );
     const ok = ceePublisherToolRole[0][0] && ceeStoreRole[0][0];
     if (!ok) {
-      return await queryInterface.bulkInsert('ClientRoles', [{
-        id: uuidv4(),
-        name: 'cee-publisher-tool',
-        description: 'Authorizes the C2E Publisher Tool to access the relevant resources'
-      }, {
-        id: uuidv4(),
-        name: 'cee-store',
-        description: 'Authorizes the C2E Player to access the relevant resources'
-      }], {});
+      const publisherToolRoleId = uuidv4();
+      const storeRoleId = uuidv4();
+      const publisherToolClientId = uuidv4();
+      const storeClientId = uuidv4();
+
+      await queryInterface.bulkInsert('ClientRoles', [{
+          id: storeRoleId,
+          name: 'cee-store',
+          description: 'Authorizes the C2E store to access the relevant resources'
+        }, {
+          id: publisherToolRoleId,
+          name: 'cee-publisher-tool',
+          description: 'Authorizes the C2E publisher tool to access the relevant resources'
+        }], {});
+
+      await queryInterface.bulkInsert('Clients', [{
+          id: publisherToolClientId,
+          email: 'studio@curriki.org',
+          clientRoleId: publisherToolRoleId
+        }, {
+          id: storeClientId,
+          email: 'demo-c2e-store@curriki.org',
+          clientRoleId: storeRoleId
+        }], {});
+
+      return queryInterface.bulkInsert('ApiKeys', [{
+          id: uuidv4(),
+          key: generateKey(),
+          clientId: publisherToolClientId
+        }, {
+          id: uuidv4(),
+          key: generateKey(),
+          clientId: storeClientId
+        }], {});
     }
   },
 
