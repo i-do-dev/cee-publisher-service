@@ -504,7 +504,7 @@
             "in": "header",
             "description": "C2E Publisher Servcie API Key",
             "type": "string",
-            "default": "APIKey",
+            "default": "APIKey (role: cee-publisher-tool)",
             "required": true
           },
           {
@@ -561,7 +561,60 @@
         }
       }
     },
-    "/api/v1/service/keys": {
+    "/api/v1/c2e-stores": {
+      "get": {
+        "x-swagger-router-controller": "c2e-store",
+        "operationId": "Get C2E Stores",
+        "tags": ["C2E Store Routes"],
+        "summary": "Get C2E Stores",
+        "parameters": [
+          {
+            "name": "X-API-KEY",
+            "in": "header",
+            "description": "Get C2E Stores",
+            "type": "string",
+            "default": "APIKey (role: cee-publisher-tool)",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response Format",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer",
+                  "example": 200
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Success"
+                },
+                "result": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "C2E Store ID"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "C2E Store Name"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      
+      }
+    },
+    "/api/v1/keys": {
       "get": {
         "x-swagger-router-controller": "users",
         "operationId": "API Keys",
@@ -603,6 +656,10 @@
                       "clientRole": {
                         "type": "string",
                         "example": "cee-publisher-tool | cee-store"
+                      },
+                      "clientEmail": {
+                        "type": "string",
+                        "example": "demo-c2e-store@curriki.org"
                       }
                     }
                   }

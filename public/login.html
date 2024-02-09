@@ -60,7 +60,7 @@
                     }),
                     success: function (response) {
                         console.log(response);
-                        window.location.href = './?token=' + response.result;
+                        window.location.href = './dashboard?token=' + response.result;
                     },
                     error: function (xhr, status, error) {
                         alert('Error: ' + xhr.responseJSON.message);
