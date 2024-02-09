@@ -1,3 +1,4 @@
+// Client model with id and email fields
 'use strict';
 const {
   Model
@@ -5,33 +6,37 @@ const {
 const { v4: uuidv4 } = require('uuid');
 
 module.exports = (sequelize, DataTypes) => {
-    class ClientRole extends Model {
+  class Client extends Model {
         static associate(models) {
-            ClientRole.hasMany(models.Client, {
+            Client.belongsTo(models.ClientRole, {
                 foreignKey: 'clientRoleId',
+                targetKey: 'id',
+                references: { model: 'ClientRole', key: 'id' }
+            });
+
+            Client.hasMany(models.ApiKey, {
+                foreignKey: 'clientId',
                 sourceKey: 'id',
-                references: { model: 'Client', key: 'id' }
+                references: { model: 'ApiKey', key: 'id' }
             });
         }
     }
 
-    ClientRole.init({
+    Client.init({
         id: {
             type: DataTypes.UUID,
             defaultValue: () => uuidv4(),
             allowNull: false,
             primaryKey: true,
         },
-        name: {
+        email: {
             type: DataTypes.STRING,
             allowNull: false,
-        },
-        description: {
-            type: DataTypes.STRING,
-        },
+            unique: true,
+        }
     },
     {
         sequelize
     });
-    return ClientRole;
+    return Client;
 }

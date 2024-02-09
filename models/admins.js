@@ -25,7 +25,8 @@ module.exports = (sequelize, DataTypes) => {
         },
     },
     {
-        sequelize
+        sequelize,
+        tableName: 'admins'
     });
     return Admins;
 }

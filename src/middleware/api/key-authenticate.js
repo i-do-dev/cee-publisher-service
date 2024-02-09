@@ -1,29 +1,24 @@
-const { ApiKey, ClientRole } = require('./../../../models');
+const { ApiKey, ClientRole, Client } = require('./../../../models');
 
 const keyAuthenticateMiddleware = async (req, res, next) => {
-  const authorizationVal = req.get('Authorization').split(' ');
-  if ( authorizationVal.length === 0 || authorizationVal[0] !== 'Bearer') {
-    return res.status(401).json({ error: 'Invalid authorization' });
-  }
-
-  const apiKey = authorizationVal[1];
-  if (!apiKey) {
-    return res.status(401).json({ error: 'API key required' });
-  }
+  const key = req.header('X-API-KEY');
+  if (!key) return res.status(401).json({ error: 'Invalid authorization' });
 
   const keyRecord = await ApiKey.findOne({
-    where: { key: apiKey },
+    where: { key: key },
     include: {
-      model: ClientRole,
-      as: 'ClientRole', // Specify the alias for the association
+      model: Client,
+      as: 'Client', // Specify the alias for the association
+      include: {
+        model: ClientRole,
+        as: 'ClientRole'
+      }
     },
   });
   
-  if (!keyRecord) {
-    return res.status(401).json({ error: 'Invalid API key' });
-  }
+  if (!keyRecord) return res.status(401).json({ error: 'Invalid API key' });
 
-  req.clientRole = keyRecord.ClientRole.name;
+  req.Client = keyRecord.Client;
   next();
 };
 

@@ -1,27 +1,27 @@
 'use strict';
-const { v4: uuidv4 } = require('uuid');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable('ApiKeys', {
+    await queryInterface.createTable('ApiKeys', {
       id: {
         type: Sequelize.UUID,
-        defaultValue: () => uuidv4(),
+        defaultValue: Sequelize.UUIDV4,
         allowNull: false,
         primaryKey: true,
       },
       key: {
         type: Sequelize.TEXT,
-        defaultValue: () => uuidv4(),
         allowNull: false,
         unique: true,
       },
-      clientRoleId: {
+      clientId: {
         type: Sequelize.UUID,
         references: {
-          model: 'ClientRoles',
-          key: 'id'
-        }
+          model: 'Clients', // name of Target model
+          key: 'id', // key in Target model that we're referencing
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
       },
       createdAt: {
         allowNull: false,
@@ -35,8 +35,7 @@ module.exports = {
       }
     });
   },
-
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('ApiKeys');
-  }
+    await queryInterface.dropTable('ApiKeys');
+  },
 };

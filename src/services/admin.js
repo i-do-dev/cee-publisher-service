@@ -2,8 +2,8 @@ const bcrypt = require("bcrypt");
 const passCom = require("joi-password-complexity");
 const ERROR_CODES = require("../constant/error-messages");
 const CustomError = require("../utils/error");
-const { Admins } = require("../../models/admins");
-const { ResetPasswordTokens } = require("../../models/resetPasswordTokens");
+const { Admins } = require("../../models");
+const { ResetPasswordTokens } = require("../../models");
 const { EmailService } = require("../utils/email");
 const CONST_VARS = require("../constant/constant")
 const {

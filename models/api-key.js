@@ -3,13 +3,16 @@ const {
   Model
 } = require('sequelize');
 const { v4: uuidv4 } = require('uuid');
+const { generateKey } = require('../src/utils/key');
+
 module.exports = (sequelize, DataTypes) => {
     class ApiKey extends Model {
         static associate(models) {
-            ApiKey.belongsTo(models.ClientRole, {
-                foreignKey: 'clientRoleId',
+            // ApiKey belongs to Client
+            ApiKey.belongsTo(models.Client, {
+                foreignKey: 'clientId',
                 targetKey: 'id',
-                references: { model: 'ClientRole', key: 'id' }
+                references: { model: 'Client', key: 'id' }
             });
         }
     }
@@ -23,14 +26,10 @@ module.exports = (sequelize, DataTypes) => {
         },
         key: {
             type: DataTypes.TEXT,
-            defaultValue: () => uuidv4(),
+            defaultValue: () => generateKey(),
             allowNull: false,
             unique: true,
-        },
-        clientRoleId: {
-            type: DataTypes.UUID,
-            allowNull: false
-        },
+        }
     },
     {
         sequelize
