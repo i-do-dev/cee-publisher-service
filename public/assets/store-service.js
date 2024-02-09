@@ -1,11 +1,13 @@
 $(document).ready(function() {
     document.getElementById('store-service-form').addEventListener('submit', function(event) {
         event.preventDefault();
-    
+        
+        var host = document.getElementById('host').value;
         var name = document.getElementById('name').value;
         var key = document.getElementById('key').value;
     
         var storeService = {
+            host: host,
             name: name,
             key: key
         };
@@ -63,6 +65,10 @@ $(document).ready(function() {
                 var nameCell = document.createElement('td');
                 nameCell.textContent = storeService.name;
                 row.appendChild(nameCell);
+
+                var hostCell = document.createElement('td');
+                hostCell.textContent = storeService.host;
+                row.appendChild(hostCell);
     
                 var keyCell = document.createElement('td');
                 keyCell.textContent = storeService.key;

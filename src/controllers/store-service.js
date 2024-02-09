@@ -10,6 +10,7 @@ class StoreServiceController {
             return {
               id: storeService.id,
               name: storeService.name,
+              host: storeService.host,
               key: storeService.key,
             };
           });
@@ -30,6 +31,7 @@ class StoreServiceController {
           // Create a new record in StoreService model
           const storeService = await models.StoreService.create({
             name: req.body.name,
+            host: req.body.host,
             key: req.body.key,
           });
 
