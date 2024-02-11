@@ -62,6 +62,10 @@ $(document).ready(function() {
             response.result.forEach(storeService => {
                 var row = document.createElement('tr');
     
+                var IDCell = document.createElement('td');
+                IDCell.textContent = storeService.id;
+                row.appendChild(IDCell);
+                
                 var nameCell = document.createElement('td');
                 nameCell.textContent = storeService.name;
                 row.appendChild(nameCell);
