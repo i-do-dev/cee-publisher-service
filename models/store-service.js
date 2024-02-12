@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
+        host: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
         key: {
             type: DataTypes.STRING,
             allowNull: true,

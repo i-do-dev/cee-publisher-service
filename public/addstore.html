@@ -17,7 +17,7 @@
                         <a class="nav-link active" aria-current="page" href="apikeys">API Keys</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="addstore">Add Store</a>
+                        <a class="nav-link" href="addstore">Manage Stores</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="settings">Settings</a>
@@ -37,6 +37,11 @@
             </div>
 
             <div class="mb-3">
+                <label for="name" class="form-label">Host:</label>
+                <input type="text" id="host" name="host" class="form-control">
+            </div>
+
+            <div class="mb-3">
                 <label for="key" class="form-label">Key:</label>
                 <input type="text" id="key" name="key" class="form-control">
             </div>
@@ -48,7 +53,9 @@
         <table id="store-service-table" class="table">
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Name</th>
+                    <th>Host</th>
                     <th>Key</th>
                 </tr>
             </thead>

@@ -18,14 +18,6 @@ module.exports = {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      manifest: {
-        type: DataTypes.JSONB,
-        allowNull: true,
-      },
-      type: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

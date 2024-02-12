@@ -3,24 +3,33 @@ const { v4: uuidv4 } = require('uuid');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('StoreServices', {
+    await queryInterface.createTable('CeeManifests', {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
         defaultValue: () => uuidv4(),
       },
-      name: {
-        type: Sequelize.STRING,
-        allowNull: false,
+      ceeId: {
+        type: Sequelize.UUID,
+        allowNull: false
       },
-      host: {
-        type: Sequelize.STRING,
-        allowNull: false,
+      manifest: {
+        type: Sequelize.JSONB,
+        allowNull: true,
       },
-      key: {
+      type: {
         type: Sequelize.STRING,
         allowNull: true,
+      },
+      licenseKey: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      storeId: {
+        type: Sequelize.UUID,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
@@ -35,6 +44,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('StoreServices');
-  },
+    await queryInterface.dropTable('CeeManifests');
+  }
 };

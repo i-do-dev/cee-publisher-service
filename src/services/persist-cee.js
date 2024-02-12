@@ -1,5 +1,6 @@
+const models = require("../../models");
 class PersistCeeService {
-  static async save(req, models) {
+  static async save(req) {
     // try catch with throw error
     try {
         // Extract payload from request

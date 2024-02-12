@@ -500,7 +500,7 @@
         "produces": ["application/json"],
         "parameters": [
           {
-            "name": "X-API-KEY",
+            "name": "x-api-key",
             "in": "header",
             "description": "C2E Publisher Servcie API Key",
             "type": "string",
@@ -569,7 +569,7 @@
         "summary": "Get C2E Stores",
         "parameters": [
           {
-            "name": "X-API-KEY",
+            "name": "x-api-key",
             "in": "header",
             "description": "Get C2E Stores",
             "type": "string",
