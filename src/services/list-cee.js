@@ -14,6 +14,7 @@ class ListCeeService {
             const postData = {
                 ceeId: cee.id,
                 name: cee.name,
+                creator: {...payload.creator}
             };
             const response = await axios.post(storeService.host + '/api/v1/c2e-listings', postData, {
                 headers: {

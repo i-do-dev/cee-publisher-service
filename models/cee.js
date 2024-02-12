@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     class Cee extends Model {
         static associate(models) {
             Cee.hasMany(models.CeeWorkflow, { foreignKey: 'ceeId', sourceKey: 'id' });
+            Cee.hasMany(models.CeeManifest, { foreignKey: 'ceeId', sourceKey: 'id' });
             // Cee has one CeeCreator
             Cee.hasOne(models.CeeCreator, { 
                 foreignKey: 'ceeId', 
@@ -28,15 +29,7 @@ module.exports = (sequelize, DataTypes) => {
         description: {
             type: DataTypes.STRING,
             allowNull: true,
-        },
-        manifest: {
-            type: DataTypes.JSONB,
-            allowNull: true,
-        },
-        type: {
-            type: DataTypes.STRING,
-            allowNull: true,
-        },
+        }
     },
     {
         sequelize
