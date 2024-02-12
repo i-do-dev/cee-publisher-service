@@ -5,13 +5,13 @@ const { generateKey } = require('../src/utils/key');
 module.exports = {
   up: async (queryInterface, Sequelize) => {
 
-    // query ClientRoles where name = 'cee-publisher-tool' and 'cee-store'
+    // query ClientRoles where name = 'cee-publisher-tool' and 'cee-store-service'
     // insert into ClientRoles if not exists
     const ceePublisherToolRole = await queryInterface.sequelize.query(
       `SELECT id FROM "ClientRoles" WHERE name = 'cee-publisher-tool';`
     );
     const ceeStoreRole = await queryInterface.sequelize.query(
-      `SELECT id FROM "ClientRoles" WHERE name = 'cee-store';`
+      `SELECT id FROM "ClientRoles" WHERE name = 'cee-store-service';`
     );
     const ok = ceePublisherToolRole[0][0] && ceeStoreRole[0][0];
     if (!ok) {
@@ -22,7 +22,7 @@ module.exports = {
 
       await queryInterface.bulkInsert('ClientRoles', [{
           id: storeRoleId,
-          name: 'cee-store',
+          name: 'cee-store-service',
           description: 'Authorizes the C2E store to access the relevant resources'
         }, {
           id: publisherToolRoleId,
