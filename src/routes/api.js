@@ -6,6 +6,7 @@ const pagesRouter = require('./pages');
 const keyRouter = require('./key');
 const storeServiceRouter = require('./store-service');
 const ceeStoreRouter = require('./cee-store');
+const streamRouter = require('./stream');
 
 const setRouter = (app) => {
 
@@ -22,6 +23,7 @@ const setRouter = (app) => {
   // page routes
   app.use('/', router);
   router.use(`/`, pagesRouter);
+  router.use(`/stream`, streamRouter);
 };
 
 module.exports = { setRouter };
