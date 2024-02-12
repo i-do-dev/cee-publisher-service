@@ -655,7 +655,7 @@
                       },
                       "clientRole": {
                         "type": "string",
-                        "example": "cee-publisher-tool | cee-store"
+                        "example": "cee-publisher-tool | cee-store-service"
                       },
                       "clientEmail": {
                         "type": "string",
