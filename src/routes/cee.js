@@ -11,4 +11,10 @@ ceeRouter.post('/publish',
     CeeController.publish
 );
 
+ceeRouter.post('/manifest',
+    authenticate,
+    authorize(['cee-store-service']),
+    CeeController.createManifest
+);
+
 module.exports = ceeRouter;

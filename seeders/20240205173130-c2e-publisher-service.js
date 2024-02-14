@@ -11,7 +11,7 @@ module.exports = {
     if (ok) {
       return await queryInterface.bulkInsert('Service', [{
         id: uuidv4(),
-        name: 'C2E Publisher Service',
+        name: 'Demo Publisher Service',
         description: 'C2E Publisher Service reference implementation',
         createdAt: new Date(),
         updatedAt: new Date()

@@ -8,7 +8,7 @@ const authorize = require('../middleware/api/key-authorize');
 streamRouter.get('/token', 
     authenticate, 
     authorize(['cee-store']),
-    StreamController.token
+    StreamController.getToken
 );
 
 streamRouter.get('/token/verify', 

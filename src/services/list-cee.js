@@ -7,6 +7,18 @@ class ListCeeService {
             // Extract payload from request
             const payload = req.body;
             const storeId =  payload.storeId;
+
+            // Extract all subject, educationLevel and keywords attrubutes under workflowItems attribute from payload
+            const workflowItems = payload.workflowItems;
+            let subject = [];
+            let educationLevel = [];
+            let keywords = [];
+            workflowItems.forEach(workflowItem => {
+                subject = [...subject, ...workflowItem.subject];
+                educationLevel = [...educationLevel, ...workflowItem.educationLevel];
+                keywords = [...keywords, ...workflowItem.keywords];
+            });
+
             // get StoreService by storeId
             const storeService = await models.StoreService.findByPk(storeId);
             const axios = require('axios');
@@ -14,7 +26,11 @@ class ListCeeService {
             const postData = {
                 ceeId: cee.id,
                 name: cee.name,
-                creator: {...payload.creator}
+                description: cee.description,
+                subject,
+                educationLevel,
+                keywords,
+                publisherClientId: storeService.publisherClientId
             };
             const response = await axios.post(storeService.host + '/api/v1/c2e-listings', postData, {
                 headers: {
@@ -22,7 +38,7 @@ class ListCeeService {
                 }
             });
 
-            console.log("Response =====>>>>> ", response.data);
+            console.log("******* LISTED CEE *******");
             
         } catch (error) {
             throw error;

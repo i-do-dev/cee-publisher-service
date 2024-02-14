@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     class CeeWorkflow extends Model {
       static associate(models) {
         CeeWorkflow.belongsTo(models.Cee, { foreignKey: 'ceeId', targetKey: 'id', references: { model: 'Cee', key: 'id' } });
+        CeeWorkflow.hasMany(models.CeeMedia, { foreignKey: 'ceeWorkflowId', sourceKey: 'id', references: { model: 'CeeMedia', key: 'id' } });
       }
     }
     
@@ -51,10 +52,13 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      status: {
+      thumbnailUrl: {
         type: DataTypes.STRING,
         allowNull: true,
-        defaultValue: 'draft',
+      },
+      url: {
+        type: DataTypes.STRING,
+        allowNull: true,
       }
     },
     {

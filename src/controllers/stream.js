@@ -1,5 +1,5 @@
 const { responseHandler } = require("../utils/response");
-const CeeToken = require('../../models/cee-token');
+const {CeeToken} = require('../../models');
 
 class StreamController {
 
