@@ -37,7 +37,7 @@ class ListCeeService {
                 }
             });
 
-            console.log("Response =====>>>>> ", response.data);
+            console.log("******* LISTED CEE *******");
             
         } catch (error) {
             throw error;

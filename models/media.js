@@ -23,6 +23,12 @@ module.exports = (sequelize, DataTypes) => {
         targetKey: 'id',
         references: { model: 'MediaRoyalty', key: 'id' }
       });
+
+      Media.hasMany(models.CeeMedia, {
+        foreignKey: 'mediaId',
+        sourceKey: 'id',
+        references: { model: 'CeeMedia', key: 'id' }
+      });
     }
   }
   Media.init({

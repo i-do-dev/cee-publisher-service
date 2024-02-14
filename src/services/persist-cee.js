@@ -15,14 +15,13 @@ class PersistCeeService {
         const creator =  payload.creator;
         // Find CeeCreator model instance by email. If it does not exist, create a new one
         await CeeCreator.findOrCreate({
-            where: { email: creator.email },
+            where: { email: creator.email, ceeId: cee.id},
             defaults: {
                 name: creator.name,
                 email: creator.email,
                 ceeId: cee.id
             }
         });
-
 
         // const storeId =  payload.storeId;
     
@@ -33,7 +32,7 @@ class PersistCeeService {
                 description: item.description,
                 type: item.type,
                 subject: item.subject.join(','), // Convert the array to a comma-separated string
-                educationLevel: item.educationLevel.join(','), // Convert the array to a comma-separated string
+                educationalLevel: item.educationLevel.join(','), // Convert the array to a comma-separated string
                 keywords: item.keywords.join(','), // Convert the array to a comma-separated string
                 url: item.url,
                 thumbnailUrl: item.thumbnailUrl,
