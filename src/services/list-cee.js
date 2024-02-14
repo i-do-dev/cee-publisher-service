@@ -26,6 +26,7 @@ class ListCeeService {
             const postData = {
                 ceeId: cee.id,
                 name: cee.name,
+                description: cee.description,
                 subject,
                 educationLevel,
                 keywords,
