@@ -5,6 +5,8 @@ const {CeeCreator} = require("../../models");
 const {CeeMedia} = require("../../models");
 const {Media} = require("../../models");
 const {MediaRoyalty} = require("../../models");
+const {StoreService} = require("../../models");
+const {Service} = require("../../models");
 const {ManifestJsonldService} = require("./manifest-jsonld");
 
 class CeeManifestService {
@@ -15,12 +17,12 @@ class CeeManifestService {
             const previewCeeSubscription = payload.previewCeeSubscription;
             const licensedCeeSubscription = payload.licensedCeeSubscription;
             const client = req.Client;
-            /*
-            console.log('ceeId +++++++ ', ceeId);
-            console.log('previewCeeSubscription +++++++ ', previewCeeSubscription);
-            console.log('licensedCeeSubscription +++++++ ', licensedCeeSubscription);
-            console.log('client +++++++ ', {email: client.email, role: client.ClientRole});
-            */
+
+            // get StoreService model by publisherClientId attribute where publisherClientId is the client's id
+            const storeService = await StoreService.findOne({ where: { publisherClientId: client.id } });
+            // get first record from Service model
+            const publisherService = await Service.findOne();
+        
             // get Cee by ceeId along with its associated models like CeeWorkflow, CeeCreator and CeeMedia
 
             const cee = await Cee.findByPk(ceeId, {
@@ -48,7 +50,29 @@ class CeeManifestService {
                     }
                 ]
             });
-            ManifestJsonldService.get(cee, previewCeeSubscription);
+
+            // Making Prewview Manifest
+            const ceeManifestPreview = await CeeManifest.create({
+                ceeId: cee.id,
+                type: 'preview',
+                subscriptionId: previewCeeSubscription.id,
+                storeId: storeService.id
+            });
+            const previewManifest = await ManifestJsonldService.get(cee, ceeManifestPreview.id, previewCeeSubscription, storeService, publisherService);
+            // update manifest attribute of ceeManifestPreview with previewManifest
+            await ceeManifestPreview.update({ manifest: previewManifest });
+
+            // Making Licensed Manifest
+            const ceeManifestLicensed = await CeeManifest.create({
+                ceeId: cee.id,
+                type: 'licensed',
+                subscriptionId: licensedCeeSubscription.id,
+                storeId: storeService.id
+            });
+            const licensedManifest = await ManifestJsonldService.get(cee, ceeManifestLicensed.id, licensedCeeSubscription, storeService, publisherService);
+            // update manifest attribute of ceeManifestLicensed with licensedManifest
+            await ceeManifestLicensed.update({ manifest: licensedManifest });
+            
         } catch (error) {
             throw error;
         }

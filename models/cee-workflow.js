@@ -52,10 +52,13 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      status: {
+      thumbnailUrl: {
         type: DataTypes.STRING,
         allowNull: true,
-        defaultValue: 'draft',
+      },
+      url: {
+        type: DataTypes.STRING,
+        allowNull: true,
       }
     },
     {

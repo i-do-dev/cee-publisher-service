@@ -28,10 +28,8 @@ module.exports = {
       educationalLevel: Sequelize.STRING,
       subject: Sequelize.STRING,
       keywords: Sequelize.STRING,
-      status: {
-        type: Sequelize.STRING,
-        defaultValue: 'draft',
-      },
+      thumbnailUrl: Sequelize.STRING,
+      url: Sequelize.STRING,
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

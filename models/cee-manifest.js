@@ -1,3 +1,5 @@
+// require uuidv4
+const { v4: uuidv4 } = require('uuid');
 const { DataTypes, Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
@@ -26,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: true,
         },
-        licenseKey: {
+        subscriptionId: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true,

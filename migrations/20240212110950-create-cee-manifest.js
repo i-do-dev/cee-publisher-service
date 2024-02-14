@@ -22,7 +22,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      licenseKey: {
+      subscriptionId: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true,
