@@ -5,11 +5,15 @@ $(document).ready(function() {
         var host = document.getElementById('host').value;
         var name = document.getElementById('name').value;
         var key = document.getElementById('key').value;
+        var clientId = document.getElementById('clientId').value;
+        var publisherClientId = document.getElementById('publisherClientId').value;
     
         var storeService = {
             host: host,
             name: name,
-            key: key
+            key: key,
+            clientId: clientId,
+            publisherClientId: publisherClientId
         };
     
         // jquery ajax post request to POST - /api/v1/store to post json data
@@ -77,6 +81,14 @@ $(document).ready(function() {
                 var keyCell = document.createElement('td');
                 keyCell.textContent = storeService.key;
                 row.appendChild(keyCell);
+
+                var clientIdCell = document.createElement('td');
+                clientIdCell.textContent = storeService.clientId;
+                row.appendChild(clientIdCell);
+
+                var publisherClientIdCell = document.createElement('td');
+                publisherClientIdCell.textContent = storeService.publisherClientId;
+                row.appendChild(publisherClientIdCell);
     
                 tableBody.appendChild(row);
             });

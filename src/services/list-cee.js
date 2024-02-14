@@ -29,6 +29,7 @@ class ListCeeService {
                 subject,
                 educationLevel,
                 keywords,
+                publisherClientId: storeService.publisherClientId
             };
             const response = await axios.post(storeService.host + '/api/v1/c2e-listings', postData, {
                 headers: {

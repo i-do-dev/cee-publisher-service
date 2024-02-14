@@ -12,6 +12,8 @@ class StoreServiceController {
               name: storeService.name,
               host: storeService.host,
               key: storeService.key,
+              clientId: storeService.clientId,
+              publisherClientId: storeService.publisherClientId
             };
           });
 
@@ -33,6 +35,8 @@ class StoreServiceController {
             name: req.body.name,
             host: req.body.host,
             key: req.body.key,
+            clientId: req.body.clientId,
+            publisherClientId: req.body.publisherClientId
           });
 
           // Send a response
