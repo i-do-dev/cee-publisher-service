@@ -13,11 +13,17 @@ class ListCeeService {
             let subject = [];
             let educationLevel = [];
             let keywords = [];
+
+            if (!Array.isArray(workflowItems) || workflowItems.length === 0) {
+                throw new Error("Workflow items are required");
+            }
+
             workflowItems.forEach(workflowItem => {
                 subject = [...subject, ...workflowItem.subject];
                 educationLevel = [...educationLevel, ...workflowItem.educationLevel];
-                keywords = [...keywords, ...workflowItem.keywords];
+                keywords = [...keywords, ...workflowItem.keywords]
             });
+            const thumbnailUrl = workflowItems[0].thumbnailUrl;
 
             // get StoreService by storeId
             const storeService = await models.StoreService.findByPk(storeId);
@@ -27,6 +33,7 @@ class ListCeeService {
                 ceeId: cee.id,
                 name: cee.name,
                 description: cee.description,
+                thumbnailUrl,
                 subject,
                 educationLevel,
                 keywords,
