@@ -32,6 +32,11 @@ module.exports = (sequelize, DataTypes) => {
         currency: DataTypes.STRING,
         copyrightNotice: DataTypes.TEXT,
         license: DataTypes.TEXT,
+        licenseUrl: DataTypes.STRING, // URL of the license
+        licenseType: DataTypes.STRING, // Type of the license (e.g., Creative Commons)
+        licenseVersion: DataTypes.STRING, // Version of the license (e.g., 4.0)
+        yearFrom: DataTypes.STRING, // Year from which the royalty is applicable
+        yearTo: DataTypes.STRING, // Year to which the royalty is applicable
         mediaId: DataTypes.UUID,
     }, {
         sequelize

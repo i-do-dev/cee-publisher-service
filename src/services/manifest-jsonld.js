@@ -81,6 +81,14 @@ class ManifestJsonldService {
                     "license": {
                         "@type": "sdons:NoteDigitalDocument",
                         "text": mediaItem.Medium.MediaRoyalty.license,
+                        "url": mediaItem.Medium.MediaRoyalty.licenseUrl,
+                        "version": mediaItem.Medium.MediaRoyalty.licenseVersion,
+                        "additionalType": mediaItem.Medium.MediaRoyalty.licenseType,
+                        "copyrightYear": {
+                            "@type": "sdons:QuantitativeValue",
+                            "minValue": mediaItem.Medium.MediaRoyalty.yearFrom,
+                            "maxValue": mediaItem.Medium.MediaRoyalty.yearTo
+                        }
                     },
                     "additionalType":  mediaItem.Medium.MediaRoyalty.type,
                     "usageInfo": {

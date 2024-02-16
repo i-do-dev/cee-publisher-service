@@ -831,6 +831,26 @@
         "license": {
           "type": "string",
           "description": "Long copyright/license text or HTML formatted content of the video"
+        },
+        "licenseUrl": {
+          "type": "string",
+          "description": "URL of the license"
+        },
+        "licenseType": {
+          "type": "string",
+          "description": "Type of the license (e.g., Creative Commons)"
+        },
+        "licenseVersion": {
+          "type": "string",
+          "description": "Version of the license (e.g., 4.0)"
+        },
+        "yearFrom": {
+          "type": "string",
+          "description": "Year from which the royalty is applicable"
+        },
+        "yearTo": {
+          "type": "string",
+          "description": "Year to which the royalty is applicable"
         }
       }
     }

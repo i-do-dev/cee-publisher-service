@@ -69,7 +69,12 @@ class PersistCeeService {
                     currency: mediaItem.royalty.currency,
                     copyrightNotice: mediaItem.royalty.copyrightNotice,
                     license: mediaItem.royalty.license,
-                    mediaId: media.id
+                    mediaId: media.id,
+                    licenseUrl: mediaItem.royalty.licenseUrl,
+                    licenseType: mediaItem.royalty.licenseType,
+                    licenseVersion: mediaItem.royalty.licenseVersion,
+                    yearFrom: mediaItem.royalty.yearFrom,
+                    yearTo: mediaItem.royalty.yearTo
                 });
 
                 // create CeeMedia and associate with media
