@@ -30,8 +30,8 @@ module.exports = (sequelize, DataTypes) => {
         terms: DataTypes.STRING,
         amount: DataTypes.DECIMAL,
         currency: DataTypes.STRING,
-        copyrightNotice: DataTypes.STRING,
-        license: DataTypes.STRING,
+        copyrightNotice: DataTypes.TEXT,
+        license: DataTypes.TEXT,
         mediaId: DataTypes.UUID,
     }, {
         sequelize

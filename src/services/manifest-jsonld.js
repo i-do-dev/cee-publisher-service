@@ -44,6 +44,8 @@ class ManifestJsonldService {
             "@type": "sdons:CreativeWork",
             "learningResourceType": workflowItem.learningResourceType,
             "name": workflowItem.name,
+            "url": workflowItem.url,
+            "thumbnailUrl": workflowItem.thumbnailUrl,
             "description": workflowItem.description,
             "keywords": workflowItem.keywords,
             "about": workflowItem.subject.split(',').map(subject => {
