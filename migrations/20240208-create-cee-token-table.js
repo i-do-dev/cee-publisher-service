@@ -8,7 +8,7 @@ module.exports = {
         type: Sequelize.UUID,
         defaultValue: () => uuidv4(),
       },
-      ceeid: {
+      ceeId: {
         type: Sequelize.UUID,
         allowNull: false,
       },

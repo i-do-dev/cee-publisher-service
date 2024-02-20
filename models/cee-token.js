@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             primaryKey: true,
         },
-        ceemId: {
+        ceeId: {
             type: DataTypes.UUID,
             allowNull: false,
         },
