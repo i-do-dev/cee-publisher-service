@@ -13,7 +13,7 @@ Please execute the folowing commands cefore starting the App for the first time.
 
 # C2E Publisher Service API Documentation
 
-This document provides details about the C2E Publisher Service APIs.
+Welcome to the Curriki C2E Publisher Service API documentation. :tada: :tada: :tada:
 
 ## Table of Contents
 - [Base URL](#base-url)
