@@ -11,7 +11,7 @@ Please execute the folowing commands cefore starting the App for the first time.
 > npm start
 
 
-# C2E Publisher Service API Documentation
+# C2E Publisher Service API Documentation (Open API Specification)
 
 Welcome to the Curriki C2E Publisher Service API documentation. :tada: :tada: :tada:
 
