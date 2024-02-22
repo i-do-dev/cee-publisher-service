@@ -11,7 +11,7 @@ Please execute the folowing commands cefore starting the App for the first time.
 > npm start
 
 
-# C2E Publisher Service API Documentation
+# C2E Publisher Service API Documentation (Open API Specification)
 
 Welcome to the Curriki C2E Publisher Service API documentation. :tada: :tada: :tada:
 
@@ -24,12 +24,13 @@ Welcome to the Curriki C2E Publisher Service API documentation. :tada: :tada: :t
 - [C2E Store Routes](#c2e-store-routes)
   - [Get C2E Stores](#get-c2e-stores)
 - [API Key Routes](#api-key-routes)
+- [Database Diagram](#database-diagram)
 
 ## Base URL
 
 All endpoints are relative to the base URL:
 ```
-https://api.curriki.org/api/v1
+https://service-host/api/v1
 ```
 
 ## Authentication
@@ -368,6 +369,9 @@ Endpoint to retrieve API Keys.
       ```
 
 ---
+
+## Database Diagram
+![db](https://raw.githubusercontent.com/i-do-dev/cee-publisher-service/main/public/c2e-publisher-service-diagram.png?raw=true)
 
 This README provides a comprehensive overview of the Curriki C2E API endpoints, their functionalities, required parameters, and expected responses. For more detailed information, refer to the OpenAPI spec or the API implementation.
 
