@@ -6,6 +6,259 @@
   },
   "schemes": ["http", "https"],
   "paths": {
+    "/api/v1/c2e/publish": {
+      "post": {
+        "x-swagger-router-controller": "c2e",
+        "operationId": "publish-c2e",
+        "tags": ["C2E Routes"],
+        "summary": "Publish C2E (called from publisher tool)",
+        "description": "Endpoint to publish C2E with required entities",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "C2E Publisher Servcie API Key",
+            "type": "string",
+            "default": "APIKey (role: cee-publisher-tool)",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "payload",
+            "description": "C2E entity details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PublishC2ERequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully published C2E Entity",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer",
+                  "example": 200
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Success"
+                },
+                "result": {
+                  "type": "boolean",
+                  "example": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Invalid request payload"
+                },
+                "result": {
+                  "type": "boolean",
+                  "example": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/c2e/manifest": {
+      "post": {
+        "x-swagger-router-controller": "c2e",
+        "operationId": "c2e-manifest",
+        "tags": ["C2E Routes"],
+        "summary": "Create C2E Manifest (called from store service)",
+        "description": "Endpoint to create C2E Manifest",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key",
+            "type": "string",
+            "default": "APIKey (role: cee-store-service)",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "payload",
+            "description": "C2E Manifest Data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateC2EManifestRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created C2E Manifest",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer",
+                  "example": 200
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Success"
+                },
+                "result": {
+                  "type": "boolean",
+                  "example": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Invalid request payload"
+                },
+                "result": {
+                  "type": "boolean",
+                  "example": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/c2e-stores": {
+      "get": {
+        "x-swagger-router-controller": "c2e-store",
+        "operationId": "Get C2E Stores",
+        "tags": ["C2E Store Routes"],
+        "summary": "Get C2E Stores (called from publisher tool)",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "Get C2E Stores",
+            "type": "string",
+            "default": "APIKey (role: cee-publisher-tool)",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response Format",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer",
+                  "example": 200
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Success"
+                },
+                "result": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "C2E Store ID"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "C2E Store Name"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      
+      }
+    },
+    "/api/v1/keys": {
+      "get": {
+        "x-swagger-router-controller": "users",
+        "operationId": "API Keys",
+        "tags": ["API Key Routes"],
+        "summary": "Get API Keys",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authorization",
+            "type": "string",
+            "default": "Bearer APIKey",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response Format",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer",
+                  "example": 200
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Success"
+                },
+                "result": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "type": "string",
+                        "example": "APIKey"
+                      },
+                      "clientRole": {
+                        "type": "string",
+                        "example": "cee-publisher-tool | cee-store-service"
+                      },
+                      "clientEmail": {
+                        "type": "string",
+                        "example": "demo-c2e-store@curriki.org"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/admin/register": {
       "post": {
         "x-swagger-router-controller": "users",
@@ -488,190 +741,92 @@
             }
         }
       }
-    },
-    "/api/v1/c2e/publish": {
-      "post": {
-        "x-swagger-router-controller": "c2e",
-        "operationId": "publish-c2e",
-        "tags": ["C2E Routes"],
-        "summary": "Publish C2E",
-        "description": "Endpoint to publish C2E with required entities",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "description": "C2E Publisher Servcie API Key",
-            "type": "string",
-            "default": "APIKey (role: cee-publisher-tool)",
-            "required": true
-          },
-          {
-            "in": "body",
-            "name": "payload",
-            "description": "C2E entity details",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PublishC2ERequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully published C2E Entity",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "code": {
-                  "type": "integer",
-                  "example": 200
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Success"
-                },
-                "result": {
-                  "type": "boolean",
-                  "example": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "code": {
-                  "type": "integer",
-                  "example": 400
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Invalid request payload"
-                },
-                "result": {
-                  "type": "boolean",
-                  "example": false
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/c2e-stores": {
-      "get": {
-        "x-swagger-router-controller": "c2e-store",
-        "operationId": "Get C2E Stores",
-        "tags": ["C2E Store Routes"],
-        "summary": "Get C2E Stores",
-        "parameters": [
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "description": "Get C2E Stores",
-            "type": "string",
-            "default": "APIKey (role: cee-publisher-tool)",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Response Format",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "code": {
-                  "type": "integer",
-                  "example": 200
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Success"
-                },
-                "result": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string",
-                        "example": "C2E Store ID"
-                      },
-                      "name": {
-                        "type": "string",
-                        "example": "C2E Store Name"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      
-      }
-    },
-    "/api/v1/keys": {
-      "get": {
-        "x-swagger-router-controller": "users",
-        "operationId": "API Keys",
-        "tags": ["API Keys Routes"],
-        "summary": "Get API Keys",
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authorization",
-            "type": "string",
-            "default": "Bearer APIKey",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Response Format",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "code": {
-                  "type": "integer",
-                  "example": 200
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Success"
-                },
-                "result": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "key": {
-                        "type": "string",
-                        "example": "APIKey"
-                      },
-                      "clientRole": {
-                        "type": "string",
-                        "example": "cee-publisher-tool | cee-store-service"
-                      },
-                      "clientEmail": {
-                        "type": "string",
-                        "example": "demo-c2e-store@curriki.org"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
+    "CreateC2EManifestRequest": {
+      "type": "object",
+      "properties": {
+        "ceeId": {
+          "type": "string",
+          "description": "C2E Id (which has already been created in C2E Publisher Service)"
+        },
+        "previewCeeSubscription": {
+          "type": "object",
+          "properties": {
+            "ceeListingId": {
+              "type": "string",
+              "description": "C2E Listing Id (which has already been created in C2E Store Service)"
+            },
+            "type": {
+              "type": "string",
+              "description": "C2E Subscription Type (e.g., preview) (which has already been created in C2E Store Service)"
+            },
+            "licenseType": {
+              "type": "string",
+              "description": "C2E License Type (e.g., Creative Commons) (which has already been created in C2E Store Service)"
+            },
+            "licenseTerms": {
+              "type": "string",
+              "description": "C2E License Terms (which has already been created in C2E Store Service)"
+            },
+            "amount": {
+              "type": "string",
+              "description": "C2E Subscription Amount (which has already been created in C2E Store Service)"
+            },
+            "currency": {
+              "type": "string",
+              "description": "C2E Subscription Currency (e.g., USD) (which has already been created in C2E Store Service)"
+            },
+            "copyrightNotice": {
+              "type": "string",
+              "description": "C2E Subscription CopyRight Notice (which has already been created in C2E Store Service)"
+            },
+            "license": {
+              "type": "string",
+              "description": "C2E Subscription License (which has already been created in C2E Store Service)"
+            },
+            "clientId": {
+              "type": "string",
+              "description": "C2E Subscription Client Id (which is assoicated with Player Service and has already been created in C2E Store Service)"
+            }
+          }
+        },
+        "licensedCeeSubscription": {
+          "type": "object",
+          "properties": {
+            "ceeListingId": {
+              "type": "string",
+              "description": "C2E Listing Id (which has already been created in C2E Store Service)"
+            },
+            "type": {
+              "type": "string",
+              "description": "C2E Subscription Type (e.g., licensed) (which has already been created in C2E Store Service)"
+            },
+            "licenseType": {
+              "type": "string",
+              "description": "C2E License Type (e.g., Creative Commons) (which has already been created in C2E Store Service)"
+            },
+            "licenseTerms": {
+              "type": "string",
+              "description": "C2E License Terms (which has already been created in C2E Store Service)"
+            },
+            "amount": {
+              "type": "string",
+              "description": "C2E Subscription Amount (which has already been created in C2E Store Service)"
+            },
+            "currency": {
+              "type": "string",
+              "description": "C2E Subscription Currency (e.g., USD) (which has already been created in C2E Store Service)"
+            },
+            "clientId": {
+              "type": "string",
+              "description": "C2E Subscription Client Id (which is assoicated with Player Service and has already been created in C2E Store Service)"
+            }
+          }
+        }
+      }
+    },
     "PublishC2ERequest": {
       "type": "object",
       "properties": {
