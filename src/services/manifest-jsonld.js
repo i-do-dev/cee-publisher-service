@@ -128,7 +128,7 @@ class ManifestJsonldService {
         "@id": "c2ens:c2e-" + ceeManifestId +"",
         "@type": "sdons:CreativeWork",
         "creativeWorkStatus": c2eSubscription.type,
-        "schemaVersion": "0.2.0",
+        "schemaVersion": "1.0",
         "name": cee.name,
         "description": cee.description,
         "c2eCreator": c2eCreator,
