@@ -203,6 +203,193 @@
       
       }
     },
+    "/api/v1/stream/token": {
+      "get": {
+        "x-swagger-router-controller": "c2e-stream",
+        "operationId": "Stream C2E",
+        "tags": ["C2E Routes"],
+        "summary": "Get C2E Stream token (called from store service)",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "Authentication and Authorization",
+            "type": "string",
+            "default": "APIKey (role: cee-store-service)",
+            "required": true
+          },
+          {
+            "name": "subid",
+            "in": "query",
+            "description": "C2E Subscription ID setup on the store service",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response Format",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer",
+                  "example": 200
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Success"
+                },
+                "result": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "ceeId": {
+                        "type": "string",
+                        "example": "C2E ID"
+                      },
+                      "token": {
+                        "type": "string",
+                        "example": "C2E Stream Token"
+                      },
+                      "expiresAt": {
+                        "type": "string",
+                        "example": "C2E Stream Token Expiry Date"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      
+      }
+    },
+    "/api/v1/stream/token/verify": {
+      "get": {
+        "x-swagger-router-controller": "verify-c2e-stream",
+        "operationId": "Verify C2E Stream Token",
+        "tags": ["C2E Routes"],
+        "summary": "Verify C2E Stream token (called from publisher service)",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "Authentication and Authorization",
+            "type": "string",
+            "default": "APIKey (role: cee-publisher-tool)",
+            "required": true
+          },
+          {
+            "name": "ceeId",
+            "in": "query",
+            "description": "C2E ID",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "description": "Token",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response Format",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer",
+                  "example": 200
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Success"
+                },
+                "result": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "valid": {
+                        "type": "boolean",
+                        "example": "true | false"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      
+      }
+    },
+    "/api/v1/stream/manifest": {
+      "get": {
+        "x-swagger-router-controller": "c2e-stream-manifest",
+        "operationId": "C2E Manifest",
+        "tags": ["C2E Routes"],
+        "summary": "Get C2E Manifest (called from store service)",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "Authentication and Authorization",
+            "type": "string",
+            "default": "APIKey (role: cee-store-service)",
+            "required": true
+          },
+          {
+            "name": "subid",
+            "in": "query",
+            "description": "C2E Subscription ID",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response Format",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer",
+                  "example": 200
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Success"
+                },
+                "result": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "ceeId": {
+                        "type": "string",
+                        "example": "C2E Subscription ID"
+                      },
+                      "manifest": {
+                        "type": "string",
+                        "example": "C2E Manifest"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      
+      }
+    },
     "/api/v1/keys": {
       "get": {
         "x-swagger-router-controller": "users",

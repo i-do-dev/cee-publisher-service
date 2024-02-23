@@ -21,9 +21,13 @@ Welcome to the Curriki C2E Publisher Service API documentation. :tada: :tada: :t
 - [C2E Routes](#c2e-routes)
   - [Publish C2E](#publish-c2e)
   - [Create C2E Manifest](#create-c2e-manifest)
+  - [Get C2E Stream Token](#get-c2e-stream-token)
+  - [Verify C2E Stream Token](#verify-c2e-stream-token)
+  - [Get C2E Manifest](#get-c2e-manifest)
 - [C2E Store Routes](#c2e-store-routes)
   - [Get C2E Stores](#get-c2e-stores)
 - [API Key Routes](#api-key-routes)
+- [Swagger Documentation](#swagger-documentation)
 - [Database Diagram](#database-diagram)
 - [C2E SPECIFICATION DOCUMENT](https://github.com/CurrikiEducationalExperiences/cee-publisher-service/blob/main/public/C2E%20Specification%20v1.0.pdf?raw=true)
 
@@ -176,7 +180,58 @@ Endpoint to publish C2E with required entities.
         }
       }
     }
-```    
+```  
+
+> ```C2EMedia``` payload object ["#/definitions/C2EMedia"](#C2EMedia) would be defined as array of following type of objects:
+
+#### C2EMedia
+```json
+"C2EMedia": {
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "type": "string",
+          "description": "Identifier for the media"
+        },
+        "identifierType": {
+          "type": "string",
+          "description": "Type of identifier (e.g., ISBN, DOI, URL, UUID, other)"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the media"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the media"
+        },
+        "resource": {
+          "type": "string",
+          "description": "Media URL or source identifier for the media"
+        },
+        "encodingFormat": {
+          "type": "string",
+          "description": "Encoding format of the media (e.g., video/mp4)"
+        },
+        "royalty": {
+          "$ref": "#/definitions/C2EMediaRoyalty"
+        },
+        "owner": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "C2E Media Owner Name"
+            },
+            "email": {
+              "type": "string",
+              "description": "C2E Media Owner Email"
+            }
+          }
+        }
+      }
+}
+```  
 
 ### Create C2E Manifest
 
@@ -306,6 +361,109 @@ Endpoint to create C2E Manifest.
 }
 ```
 
+### Get C2E Stream Token
+
+Endpoint to get a C2E Stream token.
+
+- **URL:** `/stream/token`
+- **Method:** `GET`
+- **Summary:** Get C2E Stream token (called from store service)
+- **Parameters:**
+  - `x-api-key` (header) - Authentication and Authorization
+    - **Type:** string
+    - **Default:** APIKey (role: cee-store-service)
+    - **Required:** true
+  - `subid` (query) - C2E Subscription ID setup on the store service
+    - **Type:** string
+    - **Required:** true
+- **Responses:**
+  - `200`:
+    - **Description:** Success
+    - **Schema:**
+      ```json
+      {
+        "code": 200,
+        "message": "Success",
+        "result": [
+          {
+            "ceeId": "C2E ID",
+            "token": "C2E Stream Token",
+            "expiresAt": "C2E Stream Token Expiry Date"
+          }
+        ]
+      }
+      ```
+
+### Verify C2E Stream Token
+
+Endpoint to verify a C2E Stream token.
+
+- **URL:** `/stream/token/verify`
+- **Method:** `GET`
+- **Summary:** Verify C2E Stream token (called from publisher service)
+- **Parameters:**
+  - `x-api-key` (header) - Authentication and Authorization
+    - **Type:** string
+    - **Default:** APIKey (role: cee-publisher-tool)
+    - **Required:** true
+  - `ceeId` (query) - C2E ID
+    - **Type:** string
+    - **Required:** false
+  - `token` (query) - Token
+    - **Type:** string
+    - **Required:** true
+- **Responses:**
+  - `200`:
+    - **Description:** Success
+    - **Schema:**
+      ```json
+      {
+        "code": 200,
+        "message": "Success",
+        "result": [
+          {
+            "valid": true | false
+          }
+        ]
+      }
+      ```
+
+### Get C2E Manifest
+
+Endpoint to get a C2E Manifest.
+
+- **URL:** `/stream/manifest`
+- **Method:** `GET`
+- **Summary:** Get C2E Manifest (called from store service)
+- **Parameters:**
+  - `x-api-key` (header) - Authentication and Authorization
+    - **Type:** string
+    - **Default:** APIKey (role: cee-store-service)
+    - **Required:** true
+  - `subid` (query) - C2E Subscription ID
+    - **Type:** string
+    - **Required:** true
+- **Responses:**
+  - `200`:
+    - **Description:** Success
+    - **Schema:**
+      ```json
+      {
+        "code": 200,
+        "message": "Success",
+        "result": [
+          {
+            "ceeId": "C2E Subscription ID",
+            "manifest": "C2E Manifest"
+          }
+        ]
+      }
+      ```
+
+---
+
+
+
 ## C2E Store Routes
 
 ### Get C2E Stores
@@ -370,6 +528,9 @@ Endpoint to retrieve API Keys.
       ```
 
 ---
+
+## Swagger Documentation
+> Swagger Documentation can be found on following link https://service-host/api-docs/
 
 ## Database Diagram
 ![db](https://raw.githubusercontent.com/i-do-dev/cee-publisher-service/main/public/c2e-publisher-service-diagram.png?raw=true)
