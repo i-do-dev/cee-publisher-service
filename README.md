@@ -1,6 +1,6 @@
 # C2E Publisher Service Setup Guide
 
-Please execute the folowing commands cefore starting the App for the first time.
+Please execute the folowing commands before starting the App for the first time.
 
 > npm install
 
