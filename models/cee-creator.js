@@ -3,39 +3,29 @@ const { DataTypes, Model } = require('sequelize');
 const { v4: uuidv4 } = require('uuid');
 const { sequelize } = require("../src/utils/database");
 
-module.exports = (sequelize, DataTypes) => {
-    class CeeCreator extends Model {
-        static associate(models) {
-            // CeeCreator belongs to Cee
-            CeeCreator.belongsTo(models.Cee, { 
-                foreignKey: 'ceeId', 
-                targetKey: 'id',
-                references: { model: 'Cee', key: 'id' }
-            });
-        }
-    }
-    
-    CeeCreator.init({
-        id: {
-            type: DataTypes.UUID,
-            defaultValue: () => uuidv4(),
-            primaryKey: true,
-        },
-        name: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        email: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        ceeId: {
-            type: DataTypes.UUID,
-            allowNull: false,
-        }
+const CeeCreator = sequelize.define('CeeCreator', {
+    id: {
+        type: DataTypes.UUID,
+        defaultValue: () => uuidv4(),
+        primaryKey: true,
     },
-    {
-        sequelize
-    });
-    return CeeCreator;
-}
+    name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    ceeId: {
+        type: DataTypes.UUID,
+        allowNull: false,
+    }
+},
+{
+    freezeTableName: true,
+    underscored: true,
+    modelName: 'cee_creator'
+});
+
+module.exports = CeeCreator;
