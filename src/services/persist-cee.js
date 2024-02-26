@@ -5,22 +5,23 @@ class PersistCeeService {
     try {
         // Extract payload from request
         const payload = req.body;
-        const {Cee, CeeWorkflow, CeeCreator, Media, MediaOwner, MediaRoyalty, CeeMedia} = models;
-        // Create a Cee instance
-        const cee = await Cee.create({
-            name: payload.name,
-            description: payload.description,
-        });
 
         const creator =  payload.creator;
         // Find CeeCreator model instance by email. If it does not exist, create a new one
-        await CeeCreator.findOrCreate({
-            where: { email: creator.email, ceeId: cee.id},
+        const ceeCreator = await CeeCreator.findOrCreate({
+            where: { email: creator.email},
             defaults: {
                 name: creator.name,
                 email: creator.email,
-                ceeId: cee.id
             }
+        });
+
+        const {CeeMaster, CeeWorkflow, CeeCreator, Media, MediaOwner, MediaRoyalty, CeeMedia} = models;
+        // Create a Cee instance
+        const ceeMaster = await CeeMaster.create({
+            name: payload.name,
+            description: payload.description,
+            ceeCreatorId: ceeCreator.id
         });
 
         // const storeId =  payload.storeId;
@@ -36,7 +37,7 @@ class PersistCeeService {
                 keywords: item.keywords.join(','), // Convert the array to a comma-separated string
                 url: item.url,
                 thumbnailUrl: item.thumbnailUrl,
-                ceeId: cee.id
+                ceeMasterId: ceeMaster.id
             });
 
             // Create C2EMedia instances
