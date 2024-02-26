@@ -20,7 +20,8 @@ const CeeMedia = sequelize.define('CeeMedia', {
     }
 },
 {
-    sequelize
+    underscored: true,
+    tableName: 'cee_media'
 });
 
 module.exports = CeeMedia;

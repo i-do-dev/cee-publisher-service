@@ -8,38 +8,32 @@ function generateKey(size = 32, format = 'base64') {
     return buffer.toString(format);
 }
 
-module.exports = (sequelize, DataTypes) => {
-    class CeeToken extends Model {
-        static associate(models) {
-            CeeToken.belongsTo(models.Cee, { foreignKey: 'ceeId', targetKey: 'id', references: { model: 'Cee', key: 'id' } });
-        }
-    }
-    
-    CeeToken.init({
-        id: {
-            type: DataTypes.UUID,
-            defaultValue: () => uuidv4(),
-            allowNull: false,
-            primaryKey: true,
-        },
-        ceeId: {
-            type: DataTypes.UUID,
-            allowNull: false,
-        },
-        token: {
-            type: DataTypes.UUID,
-            defaultValue: () => generateKey(),
-            allowNull: false,
-            unique: true,
-        },
-        expiresAt: {
-            type: DataTypes.DATE,
-            allowNull: false,
-            defaultValue: sequelize.literal("CURRENT_TIMESTAMP + INTERVAL '1 HOUR'"),
-        },
+const CeeToken = sequelize.define('CeeToken', {
+    id: {
+        type: DataTypes.UUID,
+        defaultValue: () => uuidv4(),
+        allowNull: false,
+        primaryKey: true,
     },
-    {
-        sequelize
-    });
-    return CeeToken;
-}
+    ceeId: {
+        type: DataTypes.UUID,
+        allowNull: false,
+    },
+    token: {
+        type: DataTypes.UUID,
+        defaultValue: () => generateKey(),
+        allowNull: false,
+        unique: true,
+    },
+    expiresAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: sequelize.literal("CURRENT_TIMESTAMP + INTERVAL '1 HOUR'"),
+    },
+},
+{
+    underscored: true,
+    tableName: 'cee_token',
+});
+
+module.exports = CeeToken;

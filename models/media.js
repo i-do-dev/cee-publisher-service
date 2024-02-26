@@ -19,7 +19,8 @@ const Media = sequelize.define('Media', {
   identifier: DataTypes.STRING,
   parentId: DataTypes.STRING,
 }, {
-  sequelize
+  tableName: 'media',
+  underscored: true,
 });
 
 module.exports =  Media;

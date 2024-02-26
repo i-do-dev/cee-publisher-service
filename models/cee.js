@@ -1,6 +1,7 @@
-const { DataTypes, Model } = require('sequelize');
+// require uuidv4
 const { v4: uuidv4 } = require('uuid');
-const { sequelize } = require("../src/utils/database");
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../src/utils/database');
 
 const Cee = sequelize.define('Cee', {
     id: {
@@ -8,19 +9,31 @@ const Cee = sequelize.define('Cee', {
         defaultValue: () => uuidv4(),
         primaryKey: true,
     },
-    name: {
-        type: DataTypes.STRING,
+    ceeMasterId: {
+        type: DataTypes.UUID,
         allowNull: false,
     },
-    description: {
+    manifest: {
+        type: DataTypes.JSONB,
+        allowNull: true,
+    },
+    type: {
         type: DataTypes.STRING,
         allowNull: true,
+    },
+    subscriptionId: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+    },
+    storeId: {
+        type: DataTypes.UUID,
+        allowNull: false
     }
 },
-{    
-    freezeTableName: true,
+{
     underscored: true,
-    modelName: 'cee'
+    tableName: 'cee'
 });
 
 module.exports = Cee;

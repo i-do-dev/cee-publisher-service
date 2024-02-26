@@ -1,40 +1,54 @@
 const StoreService = require('./store-service');
-const Cee = require('./cee');
+const CeeMaster = require('./cee-master');
 const CeeCreator = require('./cee-creator');
 const CeeWorkflow = require('./cee-workflow');
-const CeeManifest = require('./cee-manifest');
+const Cee = require('./cee');
 const CeeMedia = require('./cee-media');
 const Media = require('./media');
 const MediaOwner = require('./media-owner');
 const MediaRoyalty = require('./media-royalty');
+const Service = require('./service');
+const Client = require('./client');
+const ClientRole = require('./client-role');
+const ApiKey = require('./api-key');
+const CeeToken = require('./cee-token');
+const Admins = require('./admins');
 
-// Cee has one CeeCreator
-Cee.hasOne(CeeCreator, { 
-  foreignKey: 'ceeId', 
+// CeeMaster has one CeeCreator
+/*
+CeeMaster.hasOne(CeeCreator, { 
+  foreignKey: 'ceeMasterId', 
   sourceKey: 'id',
   references: { model: 'CeeCreator', key: 'id' }
 });
+*/
 
 
-Cee.hasMany(CeeWorkflow, { foreignKey: 'ceeId', sourceKey: 'id' });
-Cee.hasMany(CeeManifest, { foreignKey: 'ceeId', sourceKey: 'id' });
+CeeMaster.hasMany(CeeWorkflow, { foreignKey: 'ceeMasterId', sourceKey: 'id' });
+CeeMaster.hasMany(Cee, { foreignKey: 'ceeMasterId', sourceKey: 'id' });
 
+// CeeCreator has Many Cee
+CeeCreator.hasMany(CeeMaster, { foreignKey: 'ceeCreatorId', sourceKey: 'id' });
 
-CeeCreator.belongsTo(Cee, { 
-  foreignKey: 'ceeId', 
+// CeeMaster blongs to CeeCreator
+CeeMaster.belongsTo(CeeCreator, { foreignKey: 'ceeCreatorId', targetKey: 'id', references: { model: 'CeeCreator', key: 'id' } });
+
+/*
+CeeCreator.belongsTo(CeeMaster, { 
+  foreignKey: 'ceeMasterId', 
   targetKey: 'id',
   references: { model: 'Cee', key: 'id' }
 });
+*/
 
 
-
-CeeWorkflow.belongsTo(Cee, { foreignKey: 'ceeId', targetKey: 'id', references: { model: 'Cee', key: 'id' } });
+CeeWorkflow.belongsTo(CeeMaster, { foreignKey: 'ceeMasterId', targetKey: 'id', references: { model: 'Cee', key: 'id' } });
 CeeWorkflow.hasMany(CeeMedia, { foreignKey: 'ceeWorkflowId', sourceKey: 'id', references: { model: 'CeeMedia', key: 'id' } });
 
 
 
-CeeManifest.belongsTo(Cee, { foreignKey: 'ceeId', targetKey: 'id', references: { model: 'Cee', key: 'id' } });
-CeeManifest.belongsTo(StoreService, { foreignKey: 'storeId', targetKey: 'id', references: { model: 'StoreService', key: 'id' } });
+Cee.belongsTo(CeeMaster, { foreignKey: 'ceeMasterId', targetKey: 'id', references: { model: 'Cee', key: 'id' } });
+Cee.belongsTo(StoreService, { foreignKey: 'storeId', targetKey: 'id', references: { model: 'StoreService', key: 'id' } });
 
 
 
@@ -71,8 +85,51 @@ MediaRoyalty.belongsTo(Media, {
   references: { model: 'Media', key: 'id' }
 });
 
+
+
+Client.belongsTo(ClientRole, {
+    foreignKey: 'clientRoleId',
+    targetKey: 'id',
+    references: { model: 'ClientRole', key: 'id' }
+});
+
+Client.hasMany(ApiKey, {
+    foreignKey: 'clientId',
+    sourceKey: 'id',
+    references: { model: 'ApiKey', key: 'id' }
+});
+
+
+ClientRole.hasMany(Client, {
+                foreignKey: 'clientRoleId',
+                sourceKey: 'id',
+                references: { model: 'Client', key: 'id' }
+            });
+
+ApiKey.belongsTo(Client, {
+  foreignKey: 'clientId',
+  targetKey: 'id',
+  references: { model: 'Client', key: 'id' }
+});
+
+CeeToken.belongsTo(Cee, { foreignKey: 'ceeId', targetKey: 'id', references: { model: 'Cee', key: 'id' } });
+
 module.exports = {
-  StoreService
+  StoreService,
+  CeeMaster,
+  CeeCreator,
+  CeeWorkflow,
+  Cee,
+  CeeMedia,
+  Media,
+  MediaOwner,
+  MediaRoyalty,
+  Service,
+  Client,
+  ClientRole,
+  ApiKey,
+  CeeToken,
+  Admins
 };
 
 /* 'use strict';
@@ -108,9 +165,9 @@ fs
     db[model.name] = model;
   });
 
-Object.keys(db).forEach(modelName => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
+Object.keys(db).forEach(tableName => {
+  if (db[tableName].associate) {
+    db[tableName].associate(db);
   }
 });
 

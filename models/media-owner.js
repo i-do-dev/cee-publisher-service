@@ -11,7 +11,8 @@ const MediaOwner = sequelize.define('MediaOwner', {
   name: DataTypes.STRING,
   email: DataTypes.STRING
 }, {
-  sequelize
+  underscored: true,
+  tableName: 'media_owner'
 });
 
 module.exports = MediaOwner;

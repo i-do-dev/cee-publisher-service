@@ -16,7 +16,7 @@ const CeeWorkflow = sequelize.define('CeeWorkflow', {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  ceeId: {
+  ceeMasterId: {
     type: DataTypes.UUID,
     allowNull: false,
   },
@@ -54,9 +54,8 @@ const CeeWorkflow = sequelize.define('CeeWorkflow', {
   }
 },
 {
-  freezeTableName: true,
   underscored: true,
-  modelName: 'cee_creator'
+  tableName: 'cee_workflow'
 });
 
 module.exports = CeeWorkflow;

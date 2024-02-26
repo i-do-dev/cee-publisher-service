@@ -1,50 +1,24 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../src/utils/database");
 
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-    class Admins extends Model {
-    }
-    Admins.init({
-        id: {
-            autoIncrement: true,
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            primaryKey: true,
-        },
-        email: {
-            type: DataTypes.STRING(255),
-            allowNull: false,
-        },
-        password: {
-            type: DataTypes.STRING(255),
-            allowNull: false,
-        },
-    },
-    {
-        sequelize,
-        tableName: 'admins'
-    });
-    return Admins;
-}
-/* 
-const Admins = sequelize.define("admins", {
+const Admins = sequelize.define('Admins', {
   id: {
-    autoIncrement: true,
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    primaryKey: true,
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
   },
   email: {
-    type: DataTypes.STRING(255),
-    allowNull: false,
+      type: DataTypes.STRING(255),
+      allowNull: false,
   },
   password: {
-    type: DataTypes.STRING(255),
-    allowNull: false,
+      type: DataTypes.STRING(255),
+      allowNull: false,
   },
+},
+{
+  underscored: true,
+  tableName: 'admin'
 });
-module.exports = { Admins }; */
+module.exports = Admins;

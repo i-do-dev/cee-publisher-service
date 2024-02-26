@@ -9,6 +9,7 @@ const {
 } = require('sequelize');
 const { v4: uuidv4 } = require('uuid');
 const { sequelize } = require('../src/utils/database');
+const { DataTypes } = require('sequelize');
 
 const MediaRoyalty = sequelize.define('MediaRoyalty', {
   id: {
@@ -29,7 +30,8 @@ const MediaRoyalty = sequelize.define('MediaRoyalty', {
   yearTo: DataTypes.STRING, // Year to which the royalty is applicable
   mediaId: DataTypes.UUID,
 }, {
-  sequelize
+  tableName: 'media_royalty',
+  underscored: true,
 });
 
 module.exports = MediaRoyalty;

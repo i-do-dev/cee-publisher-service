@@ -1,9 +1,8 @@
-// Make CeeCreator model with id, name and email attributes and associate it with Cee model
 const { DataTypes, Model } = require('sequelize');
 const { v4: uuidv4 } = require('uuid');
 const { sequelize } = require("../src/utils/database");
 
-const CeeCreator = sequelize.define('CeeCreator', {
+const CeeMaster = sequelize.define('CeeMaster', {
     id: {
         type: DataTypes.UUID,
         defaultValue: () => uuidv4(),
@@ -13,14 +12,18 @@ const CeeCreator = sequelize.define('CeeCreator', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    email: {
+    description: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
+    },
+    ceeCreatorId: {
+        type: DataTypes.UUID,
+        allowNull: true,
     }
 },
-{
+{    
     underscored: true,
-    tableName: 'cee_creator'
+    tableName: 'cee_master'
 });
 
-module.exports = CeeCreator;
+module.exports = CeeMaster;

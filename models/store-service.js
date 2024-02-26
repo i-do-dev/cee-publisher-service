@@ -31,9 +31,8 @@ const StoreService = sequelize.define('StoreService', {
         }
     },
     {
-        freezeTableName: true,
         underscored: true,
-        modelName: 'store_service'
+        tableName: 'store_service'
     });
 
 module.exports = StoreService;

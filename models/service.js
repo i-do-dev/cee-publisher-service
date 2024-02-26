@@ -1,29 +1,25 @@
-const { DataTypes, Model } = require('sequelize');
+const { DataTypes } = require('sequelize');
 const { v4: uuidv4 } = require('uuid');
 const { sequelize } = require("../src/utils/database");
 
-module.exports = (sequelize, DataTypes) => {
-    class Service extends Model { }
-
-    Service.init({
-        id: {
-            type: DataTypes.UUID,
-            defaultValue: () => uuidv4(),
-            primaryKey: true,
-        },
-        name: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        description: {
-            type: DataTypes.STRING,
-            allowNull: true,
-        }
+const Service = sequelize.define('Service', {
+    id: {
+        type: DataTypes.UUID,
+        defaultValue: () => uuidv4(),
+        primaryKey: true,
     },
-    {
-        sequelize,
-        modelName: 'Service',
-        freezeTableName: true,
-    });
-    return Service;
-};
+    name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    description: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    }
+},
+{
+    tableName: 'service',
+    underscored: true,
+});
+
+module.exports = Service;
