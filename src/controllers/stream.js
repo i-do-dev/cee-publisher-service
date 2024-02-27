@@ -38,7 +38,7 @@ class StreamController {
   // if streaming is authorized
   static async verifyToken(req, res, next) {
     const token = await CeeToken.findOne({
-      where: { ceeid: req.ceeId, token: req.token }
+      where: { ceeid: req.query.ceeId, token: req.query.token }
     });
 
     if (!token) {
