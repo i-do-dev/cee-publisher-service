@@ -1,7 +1,7 @@
 const models = require("../../models");
 
 class ListCeeService {
-    static async post(req, cee) {
+    static async post(req, ceeMaster) {
         // make HTTP Client to POST /api/v1/c2e-listings
         try {
             // Extract payload from request
@@ -30,9 +30,9 @@ class ListCeeService {
             const axios = require('axios');
             const apiKey = storeService.key; // Replace with your actual API key
             const postData = {
-                ceeId: cee.id,
-                name: cee.name,
-                description: cee.description,
+                ceeId: ceeMaster.id,
+                name: ceeMaster.name,
+                description: ceeMaster.description,
                 thumbnailUrl,
                 subject,
                 educationLevel,

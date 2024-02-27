@@ -6,8 +6,8 @@ const { CeeManifestService } = require("../services/cee-manifest");
 class CeeController {
     static async publish(req, res, next) {
         try {
-          const cee = await PersistCeeService.save(req);
-          await ListCeeService.post(req, cee);
+          const ceeMaster = await PersistCeeService.save(req);
+          await ListCeeService.post(req, ceeMaster);
 
           return responseHandler({
               response: res,

@@ -3,6 +3,7 @@ class PersistCeeService {
   static async save(req) {
     // try catch with throw error
     try {
+        const {CeeMaster, CeeWorkflow, CeeCreator, Media, MediaOwner, MediaRoyalty, CeeMedia} = models;
         // Extract payload from request
         const payload = req.body;
 
@@ -16,13 +17,21 @@ class PersistCeeService {
             }
         });
 
-        const {CeeMaster, CeeWorkflow, CeeCreator, Media, MediaOwner, MediaRoyalty, CeeMedia} = models;
-        // Create a Cee instance
+        // Create a CeeMaster instance with the creator's id
         const ceeMaster = await CeeMaster.create({
             name: payload.name,
             description: payload.description,
             ceeCreatorId: ceeCreator.id
         });
+        /*
+        const ceeMaster = await CeeMaster.create({
+            name: payload.name,
+            description: payload.description,
+            ceeCreatorId: ceeCreator.id
+        });
+        */
+        console.log('ceeCreator.id>>>>>>>>>>>>>>>>>> ', ceeCreator.id);
+        console.log('ceeMaster >>>>>>>>>>>>>>>>>> ', ceeMaster);
 
         // const storeId =  payload.storeId;
     
@@ -86,7 +95,7 @@ class PersistCeeService {
             }
         }
 
-        return cee;
+        return ceeMaster;
     } catch (error) {
         throw error;
     }
