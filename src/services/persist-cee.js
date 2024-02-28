@@ -9,7 +9,7 @@ class PersistCeeService {
 
         const creator =  payload.creator;
         // Find CeeCreator model instance by email. If it does not exist, create a new one
-        const ceeCreator = await CeeCreator.findOrCreate({
+        const [ceeCreator] = await CeeCreator.findOrCreate({
             where: { email: creator.email},
             defaults: {
                 name: creator.name,
@@ -23,17 +23,6 @@ class PersistCeeService {
             description: payload.description,
             ceeCreatorId: ceeCreator.id
         });
-        /*
-        const ceeMaster = await CeeMaster.create({
-            name: payload.name,
-            description: payload.description,
-            ceeCreatorId: ceeCreator.id
-        });
-        */
-        console.log('ceeCreator.id>>>>>>>>>>>>>>>>>> ', ceeCreator.id);
-        console.log('ceeMaster >>>>>>>>>>>>>>>>>> ', ceeMaster);
-
-        // const storeId =  payload.storeId;
     
         // Create CeeWorkflow instances
         for (const item of payload.workflowItems) {
@@ -64,7 +53,7 @@ class PersistCeeService {
                     name: mediaItem.name,
                     description: mediaItem.description,
                     encodingFormat: mediaItem.encodingFormat,
-                    reource: mediaItem.resource,
+                    resource: mediaItem.resource,
                     identifier: mediaItem.identifier,
                     identifierType: mediaItem.identifierType,
                     parentId: null,
