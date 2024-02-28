@@ -13,7 +13,7 @@ class CeeManifestService {
     static async create(req) {
         try {
             const payload = req.body;
-            const ceeId = payload.ceeId;
+            const ceeMasterId = payload.ceeMasterId;
             const previewCeeSubscription = payload.previewCeeSubscription;
             const licensedCeeSubscription = payload.licensedCeeSubscription;
             const client = req.Client;
@@ -23,8 +23,8 @@ class CeeManifestService {
             // get first record from Service model
             const publisherService = await Service.findOne();
         
-            // get Cee by ceeId along with its associated models like CeeWorkflow, CeeCreator and CeeMedia
-            const ceeMaster = await CeeMaster.findByPk(ceeId, {
+            // get Cee by ceeMasterId along with its associated models like CeeWorkflow, CeeCreator and CeeMedia
+            const ceeMaster = await CeeMaster.findByPk(ceeMasterId, {
                 include: [
                     {
                         model: CeeCreator

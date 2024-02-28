@@ -30,7 +30,7 @@ class ListCeeService {
             const axios = require('axios');
             const apiKey = storeService.key; // Replace with your actual API key
             const postData = {
-                ceeId: ceeMaster.id,
+                ceeMasterId: ceeMaster.id,
                 name: ceeMaster.name,
                 description: ceeMaster.description,
                 thumbnailUrl,
