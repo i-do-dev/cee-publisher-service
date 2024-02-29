@@ -36,6 +36,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('ApiKeys', null, {});
+    return queryInterface.bulkDelete('api_key', null, {});
   }
 };

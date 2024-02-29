@@ -5,13 +5,13 @@ const { generateKey } = require('../src/utils/key');
 module.exports = {
   up: async (queryInterface, Sequelize) => {
 
-    // query ClientRoles where name = 'cee-publisher-tool' and 'cee-store-service'
-    // insert into ClientRoles if not exists
+    // query client_role where name = 'cee-publisher-tool' and 'cee-store-service'
+    // insert into client_role if not exists
     const ceePublisherToolRole = await queryInterface.sequelize.query(
-      `SELECT id FROM "ClientRoles" WHERE name = 'cee-publisher-tool';`
+      `SELECT id FROM "client_role" WHERE name = 'cee-publisher-tool';`
     );
     const ceeStoreRole = await queryInterface.sequelize.query(
-      `SELECT id FROM "ClientRoles" WHERE name = 'cee-store-service';`
+      `SELECT id FROM "client_role" WHERE name = 'cee-store-service';`
     );
     const ok = ceePublisherToolRole[0][0] && ceeStoreRole[0][0];
     if (!ok) {
@@ -20,7 +20,7 @@ module.exports = {
       const publisherToolClientId = uuidv4();
       const storeClientId = uuidv4();
 
-      await queryInterface.bulkInsert('ClientRoles', [{
+      await queryInterface.bulkInsert('client_role', [{
           id: storeRoleId,
           name: 'cee-store-service',
           description: 'Authorizes the C2E store to access the relevant resources'
@@ -30,29 +30,29 @@ module.exports = {
           description: 'Authorizes the C2E publisher tool to access the relevant resources'
         }], {});
 
-      await queryInterface.bulkInsert('Clients', [{
+      await queryInterface.bulkInsert('client', [{
           id: publisherToolClientId,
           email: 'studio@curriki.org',
-          clientRoleId: publisherToolRoleId
+          client_role_id: publisherToolRoleId
         }, {
           id: storeClientId,
           email: 'demo-c2e-store@curriki.org',
-          clientRoleId: storeRoleId
+          client_role_id: storeRoleId
         }], {});
 
-      return queryInterface.bulkInsert('ApiKeys', [{
+      return queryInterface.bulkInsert('api_key', [{
           id: uuidv4(),
           key: generateKey(),
-          clientId: publisherToolClientId
+          client_id: publisherToolClientId
         }, {
           id: uuidv4(),
           key: generateKey(),
-          clientId: storeClientId
+          client_id: storeClientId
         }], {});
     }
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('ClientRoles', null, {});
+    return queryInterface.bulkDelete('client_role', null, {});
   }
 };
