@@ -29,13 +29,15 @@ class PersistCeeService {
             const workflowItem = await CeeWorkflow.create({
                 name: item.name,
                 description: item.description,
-                type: item.type,
+                learningResourceType: item.type,
                 subject: item.subject.join(','), // Convert the array to a comma-separated string
                 educationalLevel: item.educationLevel.join(','), // Convert the array to a comma-separated string
                 keywords: item.keywords.join(','), // Convert the array to a comma-separated string
                 url: item.url,
                 thumbnailUrl: item.thumbnailUrl,
-                ceeMasterId: ceeMaster.id
+                ceeMasterId: ceeMaster.id,
+                schemaType: 'CreativeWork',
+                schemaVersion: '1.0'
             });
 
             // Create C2EMedia instances
