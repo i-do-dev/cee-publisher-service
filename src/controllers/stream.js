@@ -1,13 +1,13 @@
 const { responseHandler } = require("../utils/response");
 const CustomError = require("../utils/error");
-const {CeeToken, CeeManifest, StoreService, ApiKey} = require('../../models');
+const {CeeToken, Cee, StoreService, ApiKey} = require('../../models');
 
 class StreamController {
 
     // Generates a streaming session token for a specific c2e
   static async getToken(req, res, next) {
     // TODO: find c2eid and verify validity, check store association
-    const manifest = await CeeManifest.findOne({ 
+    const manifest = await Cee.findOne({ 
       where: { subscriptionId: req.query.subid },
       include: { model: StoreService }
     });
@@ -22,7 +22,7 @@ class StreamController {
       return next(error);
     }
 
-    const ceeToken = await CeeToken.create({ceeId: manifest.ceeId});
+    const ceeToken = await CeeToken.create({ceeId: manifest.id});
     return responseHandler({
         response: res,
         result: {
@@ -38,7 +38,7 @@ class StreamController {
   // if streaming is authorized
   static async verifyToken(req, res, next) {
     const token = await CeeToken.findOne({
-      where: { ceeid: req.ceeId, token: req.token }
+      where: { ceeId: req.query.ceeId, token: req.query.token }
     });
 
     if (!token) {
@@ -61,7 +61,7 @@ class StreamController {
   }
 
   static async getManifest(req, res, next) {
-    const manifest = await CeeManifest.findOne({ 
+    const manifest = await Cee.findOne({ 
       where: { subscriptionId: req.query.subid },
       include: { model: StoreService }
     });
