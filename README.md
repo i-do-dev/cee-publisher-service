@@ -29,7 +29,7 @@ Welcome to the Curriki C2E Publisher Service API documentation. :tada: :tada: :t
 - [API Key Routes](#api-key-routes)
 - [Swagger Documentation](#swagger-documentation)
 - [Database Diagram](#database-diagram)
-- [C2E SPECIFICATION DOCUMENT](https://github.com/CurrikiEducationalExperiences/cee-publisher-service/blob/main/public/C2E%20Technical%20Specification%20v1.0.pdf?raw=true)
+- [C2E TECHNICAL SPECIFICATION DOCUMENT](https://github.com/CurrikiEducationalExperiences/cee-publisher-service/blob/main/public/C2E%20Technical%20Specification%20v1.0.pdf?raw=true)
 
 ## Base URL
 
